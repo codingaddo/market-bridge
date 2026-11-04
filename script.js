@@ -29,6 +29,128 @@ if (menuButton && navigation) {
 const year = document.querySelector('#current-year');
 if (year) year.textContent = String(new Date().getFullYear());
 
+/* Header shadow once the page scrolls, and the phone call-to-action bar,
+   shown after the hero and hidden again near the contact form and footer. */
+if ('IntersectionObserver' in window) {
+  const header = document.querySelector('.site-header');
+  const hero = document.querySelector('.hero');
+  const mobileCta = document.querySelector('[data-mobile-cta]');
+  const endZones = document.querySelectorAll('#contact, .site-footer');
+
+  const sentinel = document.createElement('div');
+  sentinel.setAttribute('aria-hidden', 'true');
+  sentinel.className = 'scroll-sentinel';
+  document.body.prepend(sentinel);
+
+  new IntersectionObserver(([entry]) => {
+    if (header) header.classList.toggle('is-scrolled', !entry.isIntersecting);
+  }).observe(sentinel);
+
+  /* Floating nav: tucks away while scrolling down, returns on any scroll up.
+     It stays put while the menu is open, while it has keyboard focus, and
+     briefly after a nav link is used. */
+  if (header) {
+    let lastY = window.scrollY;
+    let ticking = false;
+    let holdUntil = 0;
+
+    const setHidden = (hidden) => header.classList.toggle('is-hidden', hidden);
+
+    const onScroll = () => {
+      ticking = false;
+      const y = window.scrollY;
+      const delta = y - lastY;
+      if (Math.abs(delta) < 6) return;
+      lastY = y;
+      const menuOpen = menuButton && menuButton.getAttribute('aria-expanded') === 'true';
+      if (delta < 0 || y < 400 || menuOpen || header.contains(document.activeElement) || Date.now() < holdUntil) {
+        setHidden(false);
+      } else {
+        setHidden(true);
+      }
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(onScroll);
+      }
+    }, { passive: true });
+
+    header.addEventListener('focusin', () => setHidden(false));
+    header.addEventListener('click', (event) => {
+      if (event.target instanceof HTMLAnchorElement) holdUntil = Date.now() + 1200;
+    });
+  }
+
+  /* Section indicator: a soft pill slides behind the link for the section in view. */
+  if (navigation) {
+    const links = Array.from(navigation.querySelectorAll('a[href^="#"]:not(.nav-cta)'));
+    const indicator = document.createElement('span');
+    indicator.className = 'nav-indicator';
+    indicator.setAttribute('aria-hidden', 'true');
+    navigation.prepend(indicator);
+
+    const setActive = (id) => {
+      let active = null;
+      links.forEach((link) => {
+        const match = link.getAttribute('href') === `#${id}`;
+        if (match) {
+          link.setAttribute('aria-current', 'true');
+          active = link;
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+      indicator.classList.toggle('is-active', Boolean(active));
+      if (active) {
+        indicator.style.width = `${active.offsetWidth}px`;
+        indicator.style.transform = `translateX(${active.offsetLeft}px)`;
+      }
+    };
+
+    const visible = new Map();
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) visible.set(entry.target.id, entry.target);
+        else visible.delete(entry.target.id);
+      });
+      const ids = Array.from(visible.keys());
+      setActive(ids.length ? ids[ids.length - 1] : null);
+    }, { rootMargin: '-45% 0px -50% 0px' });
+
+    links.forEach((link) => {
+      const section = document.querySelector(link.getAttribute('href'));
+      if (section) spy.observe(section);
+    });
+  }
+
+  if (hero && mobileCta) {
+    let heroVisible = true;
+    const endVisible = new Set();
+
+    const update = () => {
+      const show = !heroVisible && endVisible.size === 0;
+      mobileCta.classList.toggle('is-visible', show);
+      document.body.classList.toggle('has-mobile-cta', show);
+    };
+
+    new IntersectionObserver(([entry]) => {
+      heroVisible = entry.isIntersecting;
+      update();
+    }).observe(hero);
+
+    const endObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) endVisible.add(entry.target);
+        else endVisible.delete(entry.target);
+      });
+      update();
+    });
+    endZones.forEach((zone) => endObserver.observe(zone));
+  }
+}
+
 /* Scroll reveal: runs once per element. The observer's first report tells us
    which elements start off screen; only those are hidden and animated, so
    nothing visible is hidden. Setup waits for the load event so it never

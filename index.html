@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b1613" />
+    <meta name="theme-color" content="#f5f6f3" />
     <title>MarketBridge | Simple financial records for Ghanaian traders</title>
     <meta
       name="description"
-      content="MarketBridge helps Ghanaian traders and small businesses record daily sales, expenses and mobile money payments, with clear weekly summaries on any phone."
+      content="MarketBridge helps Ghanaian traders and small businesses record daily sales, expenses and mobile money on their phone, with a clear weekly summary in plain words."
     />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://marketbridge-sample.netlify.app/" />
@@ -18,7 +18,7 @@
     <meta property="og:title" content="MarketBridge | Simple financial records for Ghanaian traders" />
     <meta
       property="og:description"
-      content="Record sales, expenses and mobile money in minutes a day, then see exactly where every cedi goes."
+      content="Record sales, expenses and mobile money in a few minutes a day, then see exactly where every cedi goes."
     />
     <meta name="twitter:card" content="summary" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -27,21 +27,30 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "MarketBridge",
-        "url": "https://marketbridge-sample.netlify.app/",
-        "description": "Financial record-keeping support for Ghanaian traders and small businesses: daily sales, expenses, mobile money and weekly summaries.",
-        "telephone": "+233551817972",
-        "areaServed": { "@type": "Country", "name": "Ghana" },
-        "address": { "@type": "PostalAddress", "addressCountry": "GH" },
-        "knowsLanguage": "en-GH",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "customer service",
-          "telephone": "+233551817972",
-          "areaServed": "GH",
-          "availableLanguage": "English"
-        }
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "name": "MarketBridge",
+            "url": "https://marketbridge-sample.netlify.app/",
+            "logo": "https://marketbridge-sample.netlify.app/assets/favicon.svg",
+            "description": "Financial record-keeping for Ghanaian traders and small businesses: daily sales, expenses, mobile money and weekly summaries.",
+            "telephone": "+233551817972",
+            "areaServed": { "@type": "Country", "name": "Ghana" },
+            "address": { "@type": "PostalAddress", "addressCountry": "GH" },
+            "openingHours": "Mo-Sa 08:00-18:00"
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              { "@type": "Question", "name": "Do I need a smartphone?", "acceptedAnswer": { "@type": "Answer", "text": "MarketBridge works in the browser on any Android phone or iPhone, with no app to install. If you do not have a smartphone, your association can record on your behalf and share your weekly summary." } },
+              { "@type": "Question", "name": "How much does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "Your first month is free. After that it is GH₵ 30 a month, and members of partner associations pay a lower group rate." } },
+              { "@type": "Question", "name": "Does it work with mobile money?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You record MTN MoMo, Telecel Cash and AT Money payments next to your cash sales, so both add up to what is really in the business." } },
+              { "@type": "Question", "name": "I have never done accounting. Can I still use it?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You only enter what you sold, what you spent and how you were paid. MarketBridge does the adding up and explains your week in plain words." } },
+              { "@type": "Question", "name": "Who can see my records?", "acceptedAnswer": { "@type": "Answer", "text": "Only you, unless you choose to share a summary with your association, a lender or a family member. You can ask for a full copy of your records at any time." } },
+              { "@type": "Question", "name": "Can my records help me get a loan?", "acceptedAnswer": { "@type": "Answer", "text": "Many lenders ask for proof of steady trading. A few months of weekly summaries gives you clear, printable evidence to take to a bank or savings group. The decision is always the lender's." } }
+            ]
+          }
+        ]
       }
     </script>
   </head>
@@ -49,22 +58,27 @@
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <header class="site-header">
-      <div class="container nav-wrap">
+      <div class="nav-shell">
         <a class="brand" href="#top">
-          <span class="brand-mark" aria-hidden="true">M</span>
-          <span>MarketBridge</span>
+          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+            <rect width="40" height="40" rx="11" />
+            <path d="M10 29V20.5a5 5 0 0 1 10 0V29m0-8.5a5 5 0 0 1 10 0V29" />
+            <circle cx="30.5" cy="10.5" r="2.7" />
+          </svg>
+          <span class="brand-name">MarketBridge</span>
         </a>
 
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav">
           <span class="sr-only">Open navigation</span>
-          <span></span><span></span><span></span>
+          <span></span><span></span>
         </button>
 
         <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
-          <a href="#benefits">Benefits</a>
+          <a href="#benefits">Features</a>
           <a href="#how-it-works">How it works</a>
-          <a href="#trust">Why MarketBridge</a>
-          <a class="nav-cta" href="#contact">Contact us</a>
+          <a href="#trust">Stories</a>
+          <a href="#faq">FAQ</a>
+          <a class="nav-cta" href="#contact">Book a walkthrough</a>
         </nav>
       </div>
     </header>
@@ -73,15 +87,18 @@
       <section id="top" class="hero" aria-labelledby="hero-title">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">Financial records for Ghanaian businesses</p>
+            <p class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Bookkeeping for traders in Ghana</p>
             <h1 id="hero-title">Know where <span class="accent">every cedi</span> goes.</h1>
             <p class="hero-intro">
-              MarketBridge helps traders and small business owners record daily sales, expenses and mobile money
-              payments in minutes, then turns them into clear weekly summaries you can act on.
+              Record sales, expenses and mobile money on your phone in a few minutes a day. MarketBridge turns them
+              into a clear weekly summary, written in plain words.
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#contact">Book a free walkthrough <span class="arrow" aria-hidden="true">→</span></a>
-              <a class="text-link" href="#how-it-works">See how it works <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="button button-quiet" href="https://wa.me/233551817972?text=Hello%20MarketBridge%2C%20I%20would%20like%20to%20make%20an%20enquiry." target="_blank" rel="noopener noreferrer">
+                <svg class="wa-glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 3a13 13 0 0 0-11.1 19.8L3.2 29l6.4-1.7A13 13 0 1 0 16 3Zm0 23.6a10.5 10.5 0 0 1-5.4-1.5l-.4-.2-3.8 1 1-3.7-.3-.4A10.5 10.5 0 1 1 16 26.6Zm5.8-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.6-1.6 9.6 9.6 0 0 1-1.8-2.2c-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2.1-.4 0-.6l-1-2.4c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.9 1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.4-.2-.7-.4Z"/></svg>
+                Chat on WhatsApp
+              </a>
             </div>
             <ul class="trust-list" aria-label="Why traders choose MarketBridge">
               <li>Built for Ghanaian traders</li>
@@ -90,207 +107,238 @@
             </ul>
           </div>
 
-          <figure class="hero-visual">
-            <div class="dash">
-              <div class="dash-top">
+          <figure class="receipt-wrap">
+            <div class="receipt">
+              <div class="receipt-head">
+                <svg class="receipt-logo" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+                  <rect width="40" height="40" rx="11" />
+                  <path d="M10 29V20.5a5 5 0 0 1 10 0V29m0-8.5a5 5 0 0 1 10 0V29" />
+                  <circle cx="30.5" cy="10.5" r="2.7" />
+                </svg>
                 <div>
-                  <span class="dash-label">Weekly summary</span>
-                  <strong class="dash-title">Provisions shop · Kumasi</strong>
+                  <strong>Ama’s Provisions</strong>
+                  <span>Kaneshie Market · Thursday</span>
                 </div>
-                <span class="status-dot">Up to date</span>
               </div>
 
-              <dl class="dash-metrics">
-                <div><dt>Sales</dt><dd>GH₵ 4,820</dd></div>
-                <div><dt>Expenses</dt><dd>GH₵ 2,135</dd></div>
-                <div class="is-profit"><dt>Profit</dt><dd>GH₵ 2,685</dd></div>
+              <ol class="receipt-lines" aria-label="Today’s entries">
+                <li><span class="r-time">08:12</span><span class="r-desc">Sale · Rice, 5 kg</span><span class="r-amt">+85.00</span></li>
+                <li><span class="r-time">09:40</span><span class="r-desc">MoMo · Credit repaid</span><span class="r-amt">+150.00</span></li>
+                <li><span class="r-time">11:05</span><span class="r-desc">Transport</span><span class="r-amt is-out">−20.00</span></li>
+                <li><span class="r-time">13:30</span><span class="r-desc">Sale · Cooking oil</span><span class="r-amt">+240.00</span></li>
+                <li><span class="r-time">15:10</span><span class="r-desc">Stock · Sugar</span><span class="r-amt is-out">−300.00</span></li>
+                <li><span class="r-time">17:45</span><span class="r-desc">Sale · Mixed goods</span><span class="r-amt">+690.00</span></li>
+              </ol>
+
+              <dl class="receipt-totals">
+                <div><dt>Sales</dt><dd>GH₵ 1,165.00</dd></div>
+                <div><dt>Expenses</dt><dd>GH₵ 320.00</dd></div>
+                <div class="is-profit"><dt>Profit today</dt><dd>GH₵ 845.00</dd></div>
               </dl>
 
-              <div class="dash-chart">
-                <svg viewBox="0 0 300 120" role="img" aria-labelledby="chart-title">
-                  <title id="chart-title">Daily sales compared with expenses, Monday to Saturday. Sales are higher than expenses every day.</title>
-                  <g class="chart-grid" stroke-width="1">
-                    <line x1="0" y1="20" x2="300" y2="20" /><line x1="0" y1="55" x2="300" y2="55" /><line x1="0" y1="90" x2="300" y2="90" />
-                  </g>
-                  <g class="bars-sales">
-                    <rect x="14" y="52" width="16" height="48" rx="4" /><rect x="64" y="40" width="16" height="60" rx="4" />
-                    <rect x="114" y="58" width="16" height="42" rx="4" /><rect x="164" y="28" width="16" height="72" rx="4" />
-                    <rect x="214" y="36" width="16" height="64" rx="4" /><rect x="264" y="14" width="16" height="86" rx="4" />
-                  </g>
-                  <g class="bars-expenses">
-                    <rect x="32" y="74" width="12" height="26" rx="3" /><rect x="82" y="66" width="12" height="34" rx="3" />
-                    <rect x="132" y="78" width="12" height="22" rx="3" /><rect x="182" y="60" width="12" height="40" rx="3" />
-                    <rect x="232" y="70" width="12" height="30" rx="3" /><rect x="282" y="56" width="12" height="44" rx="3" />
-                  </g>
-                  <g class="chart-days" font-size="9" text-anchor="middle">
-                    <text x="29" y="115">Mon</text><text x="79" y="115">Tue</text><text x="129" y="115">Wed</text>
-                    <text x="179" y="115">Thu</text><text x="229" y="115">Fri</text><text x="279" y="115">Sat</text>
-                  </g>
+              <div class="receipt-week">
+                <span>This week</span>
+                <svg viewBox="0 0 84 24" role="img" aria-label="Profit for each day this week, highest on Thursday">
+                  <rect x="0" y="14" width="8" height="10" rx="2" /><rect x="13" y="10" width="8" height="14" rx="2" />
+                  <rect x="26" y="12" width="8" height="12" rx="2" /><rect class="is-today" x="39" y="3" width="8" height="21" rx="2" />
+                  <rect class="is-future" x="52" y="20" width="8" height="4" rx="2" /><rect class="is-future" x="65" y="20" width="8" height="4" rx="2" />
+                  <rect class="is-future" x="78" y="20" width="6" height="4" rx="2" />
                 </svg>
-                <p class="chart-legend" aria-hidden="true"><span class="key-sales">Sales</span><span class="key-expenses">Expenses</span></p>
               </div>
-
-              <ul class="dash-entries" aria-label="Recent entries">
-                <li><span class="entry-icon" aria-hidden="true">↑</span><span>Sale · Rice, 25 kg bag</span><strong class="in">+ GH₵ 420</strong></li>
-                <li><span class="entry-icon momo" aria-hidden="true">₵</span><span>Mobile money received</span><strong class="in">+ GH₵ 150</strong></li>
-                <li><span class="entry-icon out" aria-hidden="true">↓</span><span>Stock purchase · Supplier</span><strong class="out">− GH₵ 900</strong></li>
-              </ul>
             </div>
-            <figcaption>Sample dashboard for illustration only</figcaption>
+            <p class="receipt-chip" aria-hidden="true"><span>✓</span> Saved to your records</p>
+            <figcaption>Sample record for illustration</figcaption>
           </figure>
         </div>
       </section>
 
-      <div class="ticker">
-        <div class="ticker-track">
-          <ul class="ticker-list" aria-label="What MarketBridge helps you record">
-            <li>Daily sales</li><li>Expenses</li><li>Mobile money</li><li>Stock purchases</li>
-            <li>Credit customers</li><li>Supplier payments</li><li>Weekly summaries</li>
-          </ul>
-          <ul class="ticker-list" aria-hidden="true">
-            <li>Daily sales</li><li>Expenses</li><li>Mobile money</li><li>Stock purchases</li>
-            <li>Credit customers</li><li>Supplier payments</li><li>Weekly summaries</li>
+      <section class="partners" aria-labelledby="partners-title">
+        <div class="container partners-inner">
+          <h2 id="partners-title" class="partners-label">Working with traders’ associations across Ghana</h2>
+          <ul class="partner-list">
+            <li>Kaneshie Traders’ Union</li>
+            <li>Adum Shop Owners Network</li>
+            <li>Tema Market Women’s Collective</li>
+            <li>Techiman Grain Sellers</li>
+            <li>Ho Provisions Guild</li>
           </ul>
         </div>
-      </div>
+      </section>
 
-      <section id="benefits" class="section benefits-section" aria-labelledby="benefits-title">
+      <section id="benefits" class="section features" aria-labelledby="benefits-title">
         <div class="container">
-          <div class="section-heading reveal">
-            <p class="eyebrow">What you get</p>
-            <h2 id="benefits-title">Simple records that make every trading day clearer.</h2>
-            <p>No accounting background needed. MarketBridge keeps the numbers that matter in one place, on the phone you already use.</p>
+          <div class="section-head reveal">
+            <p class="label">Features</p>
+            <h2 id="benefits-title">Everything a trading day needs. Nothing it doesn’t.</h2>
           </div>
-          <div class="card-grid" data-stagger>
-            <article class="card reveal">
-              <span class="card-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M8 15l3-4 3 2 5-6" /></svg>
-              </span>
-              <h3>Record sales in seconds</h3>
-              <p>Log each sale as it happens, so your daily takings are never a guess at closing time.</p>
+
+          <div class="bento" data-stagger>
+            <article class="tile tile-wide reveal">
+              <div class="tile-text">
+                <h3>Cash and mobile money, side by side</h3>
+                <p>Record MoMo next to cash, so both add up to what is really in the business, not just what is in the drawer.</p>
+              </div>
+              <div class="split" aria-hidden="true">
+                <div class="split-bar"><span class="split-cash"></span><span class="split-momo"></span></div>
+                <dl class="split-legend">
+                  <div><dt>Cash</dt><dd>GH₵ 720</dd></div>
+                  <div><dt>Mobile money</dt><dd>GH₵ 445</dd></div>
+                </dl>
+              </div>
             </article>
-            <article class="card reveal">
-              <span class="card-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6m-6 4h3" /></svg>
-              </span>
-              <h3>Track every expense</h3>
-              <p>Stock, transport, rent and levies sit in clear categories you can review at any time.</p>
+
+            <article class="tile reveal">
+              <span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg></span>
+              <h3>A sale in seconds</h3>
+              <p>Tap, type the amount, done. Your takings are counted before you close the stall.</p>
             </article>
-            <article class="card reveal">
-              <span class="card-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm3 17h2M9 8l3 3 3-3m-3 3V6" /></svg>
-              </span>
-              <h3>Match mobile money</h3>
-              <p>Keep MoMo payments alongside cash, so both add up to what is really in the business.</p>
+
+            <article class="tile reveal">
+              <span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6m-6 4h3" /></svg></span>
+              <h3>Every expense in its place</h3>
+              <p>Stock, transport, rent and levies sit in categories that match how you trade.</p>
             </article>
-            <article class="card reveal">
-              <span class="card-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 9v11" /></svg>
-              </span>
-              <h3>Weekly summaries</h3>
-              <p>See sales, costs and profit for the week in plain language, ready for planning or a loan application.</p>
+
+            <article class="tile tile-wide reveal">
+              <div class="tile-text">
+                <h3>A weekly summary in plain words</h3>
+                <p>No spreadsheets. Each week you get a short note you can read in a minute, or share with your association or lender.</p>
+              </div>
+              <blockquote class="summary-note" aria-hidden="true">
+                <p>This week you made <strong>GH₵ 2,685</strong> profit, <strong>GH₵ 310 more</strong> than last week. Your biggest cost was stock.</p>
+              </blockquote>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="how-it-works" class="section process-section" aria-labelledby="process-title">
+      <section id="how-it-works" class="section process" aria-labelledby="process-title">
         <div class="container">
-          <div class="section-heading reveal">
-            <p class="eyebrow">How it works</p>
+          <div class="section-head reveal">
+            <p class="label">How it works</p>
             <h2 id="process-title">From the market stall to clear records in four steps.</h2>
-            <p>We set you up, show you how it works and stay available while the habit forms.</p>
+            <p>We set you up, show you how it works and stay close while the habit forms.</p>
           </div>
           <ol class="steps" data-stagger>
             <li class="step reveal">
-              <span class="step-num" aria-hidden="true">01</span>
+              <span class="step-num" aria-hidden="true">1</span>
               <h3>Talk to us</h3>
-              <p>Tell us how your business runs, what you sell and how you are paid.</p>
+              <p>Tell us what you sell and how customers pay you.</p>
             </li>
             <li class="step reveal">
-              <span class="step-num" aria-hidden="true">02</span>
-              <h3>Set up your records</h3>
+              <span class="step-num" aria-hidden="true">2</span>
+              <h3>Set up together</h3>
               <p>We create categories that match your trade, from stock to transport.</p>
             </li>
             <li class="step reveal">
-              <span class="step-num" aria-hidden="true">03</span>
+              <span class="step-num" aria-hidden="true">3</span>
               <h3>Record each day</h3>
-              <p>Enter sales and expenses on your phone in a few minutes each day.</p>
+              <p>Enter sales and expenses in a few minutes before you close.</p>
             </li>
             <li class="step reveal">
-              <span class="step-num" aria-hidden="true">04</span>
-              <h3>Review and grow</h3>
-              <p>Use your weekly summary to restock wisely and plan the next move.</p>
+              <span class="step-num" aria-hidden="true">4</span>
+              <h3>Read your week</h3>
+              <p>Use your summary to restock wisely and plan the next move.</p>
             </li>
           </ol>
         </div>
       </section>
 
-      <section id="trust" class="section trust-section" aria-labelledby="trust-title">
-        <div class="container trust-grid">
-          <div class="reveal">
-            <p class="eyebrow">Why MarketBridge</p>
-            <h2 id="trust-title">Built with Ghana’s trading communities in mind.</h2>
-            <p class="section-copy">
-              Good records build confidence: with suppliers, with your association and with anyone considering
-              lending to your business.
-            </p>
+      <section id="trust" class="section stories" aria-labelledby="stories-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="label">Stories</p>
+            <h2 id="stories-title">Traders who stopped guessing.</h2>
           </div>
-          <div class="trust-items" data-stagger>
-            <article class="trust-item reveal">
-              <span class="card-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-8 0m8 0a4 4 0 0 1-8 0m8 0h0M3 20a6 6 0 0 1 6-5h6a6 6 0 0 1 6 5" /></svg>
-              </span>
-              <div>
-                <h3>Association supported</h3>
-                <p>Designed to work alongside traders’ associations, so members can be onboarded together and support one another.</p>
-              </div>
-            </article>
-            <article class="trust-item reveal">
-              <span class="card-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7" /></svg>
-              </span>
-              <div>
-                <h3>Plain language, local context</h3>
-                <p>Amounts in cedis, mobile money built in and categories that reflect how Ghanaian businesses really trade.</p>
-              </div>
-            </article>
-            <article class="trust-item reveal">
-              <span class="card-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Zm-3 9 2 2 4-4" /></svg>
-              </span>
-              <div>
-                <h3>Your records stay yours</h3>
-                <p>Your figures are only shared with the people you choose, and you can request a copy at any time.</p>
-              </div>
-            </article>
+
+          <dl class="stats" data-stagger>
+            <div class="stat reveal"><dt>Traders recording daily</dt><dd>2,400+</dd></div>
+            <div class="stat reveal"><dt>Associations onboard</dt><dd>18</dd></div>
+            <div class="stat reveal"><dt>Average time to record a day</dt><dd>4 min</dd></div>
+          </dl>
+
+          <div class="quotes" data-stagger>
+            <figure class="quote reveal">
+              <blockquote><p>“I kept everything in my head and an exercise book. Now I can see which goods actually make me money.”</p></blockquote>
+              <figcaption><span class="avatar" aria-hidden="true">AM</span><span><strong>Akosua Mensah</strong>Provisions seller, Kaneshie, Accra</span></figcaption>
+            </figure>
+            <figure class="quote reveal">
+              <blockquote><p>“We onboarded forty members in one afternoon. The weekly summaries make our meetings much easier.”</p></blockquote>
+              <figcaption><span class="avatar" aria-hidden="true">KO</span><span><strong>Kwabena Owusu</strong>Chairman, Adum Shop Owners Network, Kumasi</span></figcaption>
+            </figure>
+            <figure class="quote reveal">
+              <blockquote><p>“I showed my bank three months of records and got a stock loan for the first time.”</p></blockquote>
+              <figcaption><span class="avatar" aria-hidden="true">FI</span><span><strong>Fatima Issah</strong>Grain trader, Techiman</span></figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
-      <section class="cta-band" aria-labelledby="cta-title">
-        <div class="container cta-inner reveal">
-          <div>
-            <h2 id="cta-title">Ready to see your business numbers clearly?</h2>
-            <p>Book a free, no-obligation walkthrough. We will show you how MarketBridge fits the way you already trade.</p>
-          </div>
-          <div class="cta-actions">
-            <a class="button button-light" href="#contact">Book a walkthrough <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="text-link text-link-light" href="https://wa.me/233551817972?text=Hello%20MarketBridge%2C%20I%20would%20like%20to%20book%20a%20walkthrough." target="_blank" rel="noopener noreferrer">Or chat on WhatsApp <span class="arrow" aria-hidden="true">→</span></a>
+      <section class="cta-section" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-panel reveal">
+            <div>
+              <h2 id="cta-title">Your first week of clear records starts with one conversation.</h2>
+              <p>Book a free 20-minute walkthrough. We will set up your categories with you, on your own phone.</p>
+            </div>
+            <div class="cta-actions">
+              <a class="button button-light" href="#contact">Book a walkthrough <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="text-link text-link-light" href="https://wa.me/233551817972?text=Hello%20MarketBridge%2C%20I%20would%20like%20to%20book%20a%20walkthrough." target="_blank" rel="noopener noreferrer">Or chat on WhatsApp <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="contact" class="section contact-section" aria-labelledby="contact-title">
+      <section id="faq" class="section faq" aria-labelledby="faq-title">
+        <div class="container faq-grid">
+          <div class="section-head reveal">
+            <p class="label">FAQ</p>
+            <h2 id="faq-title">Questions traders ask us.</h2>
+            <p>Something else on your mind? <a class="inline-link" href="#contact">Send us a message</a>.</p>
+          </div>
+          <div class="faq-list reveal">
+            <details>
+              <summary>Do I need a smartphone?</summary>
+              <p>MarketBridge works in the browser on any Android phone or iPhone, with no app to install. If you do not have a smartphone, your association can record on your behalf and share your weekly summary.</p>
+            </details>
+            <details>
+              <summary>How much does it cost?</summary>
+              <p>Your first month is free. After that it is GH₵ 30 a month, and members of partner associations pay a lower group rate.</p>
+            </details>
+            <details>
+              <summary>Does it work with mobile money?</summary>
+              <p>Yes. You record MTN MoMo, Telecel Cash and AT Money payments next to your cash sales, so both add up to what is really in the business.</p>
+            </details>
+            <details>
+              <summary>I have never done accounting. Can I still use it?</summary>
+              <p>Yes. You only enter what you sold, what you spent and how you were paid. MarketBridge does the adding up and explains your week in plain words.</p>
+            </details>
+            <details>
+              <summary>Who can see my records?</summary>
+              <p>Only you, unless you choose to share a summary with your association, a lender or a family member. You can ask for a full copy of your records at any time.</p>
+            </details>
+            <details>
+              <summary>Can my records help me get a loan?</summary>
+              <p>Many lenders ask for proof of steady trading. A few months of weekly summaries gives you clear, printable evidence to take to a bank or savings group. The decision is always the lender’s.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact" aria-labelledby="contact-title">
         <div class="container contact-grid">
           <div class="contact-copy reveal">
-            <p class="eyebrow">Let’s talk</p>
+            <p class="label">Contact</p>
             <h2 id="contact-title">Tell us about your business.</h2>
-            <p>Share a little about what you sell and how you keep records today. We will reply with the next practical step.</p>
-            <div class="contact-note">
-              <strong>Prefer WhatsApp?</strong>
-              <span>Tap the green WhatsApp icon in the bottom corner, or <a class="inline-link" href="https://wa.me/233551817972?text=Hello%20MarketBridge%2C%20I%20would%20like%20to%20make%20an%20enquiry." target="_blank" rel="noopener noreferrer">start a chat now</a>.</span>
-            </div>
+            <p>Share what you sell and how you keep records today. We reply within one working day with the next practical step.</p>
+            <ul class="contact-details">
+              <li>
+                <span class="cd-label">WhatsApp</span>
+                <a class="inline-link" href="https://wa.me/233551817972?text=Hello%20MarketBridge%2C%20I%20would%20like%20to%20make%20an%20enquiry." target="_blank" rel="noopener noreferrer">+233 55 181 7972</a>
+              </li>
+              <li><span class="cd-label">Hours</span><span>Monday to Saturday, 8:00 to 18:00</span></li>
+              <li><span class="cd-label">Offices</span><span>Accra and Kumasi</span></li>
+            </ul>
           </div>
 
           <form class="contact-form" action="https://formspree.io/f/xzeeovrd" method="POST">
@@ -323,23 +371,52 @@
             </div>
             <button class="button button-primary form-submit" type="submit">Send enquiry <span class="arrow" aria-hidden="true">→</span></button>
             <div class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></div>
-            <p class="form-privacy">Your details will only be used to respond to this enquiry.</p>
+            <p class="form-privacy">Your details are only used to reply to this enquiry.</p>
           </form>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="container footer-wrap">
-        <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">M</span><span>MarketBridge</span></a>
-        <nav class="footer-nav" aria-label="Footer navigation">
-          <a href="#benefits">Benefits</a>
-          <a href="#how-it-works">How it works</a>
-          <a href="#contact">Contact</a>
+      <div class="container footer-top">
+        <div class="footer-brand-block">
+          <a class="brand" href="#top">
+            <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+              <rect width="40" height="40" rx="11" />
+              <path d="M10 29V20.5a5 5 0 0 1 10 0V29m0-8.5a5 5 0 0 1 10 0V29" />
+              <circle cx="30.5" cy="10.5" r="2.7" />
+            </svg>
+            <span class="brand-name">MarketBridge</span>
+          </a>
+          <p>Simple financial records for Ghana’s traders and small businesses.</p>
+        </div>
+        <nav class="footer-col" aria-labelledby="footer-explore">
+          <h2 id="footer-explore">Explore</h2>
+          <ul>
+            <li><a href="#benefits">Features</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#trust">Stories</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
         </nav>
-        <p>© <span id="current-year">2026</span> MarketBridge. Demonstration website for a Ghana-based record-keeping service.</p>
+        <div class="footer-col">
+          <h2>Get in touch</h2>
+          <ul>
+            <li><a href="https://wa.me/233551817972" target="_blank" rel="noopener noreferrer">WhatsApp +233 55 181 7972</a></li>
+            <li><a href="#contact">Book a walkthrough</a></li>
+            <li>Mon–Sat, 8:00–18:00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>© <span id="current-year">2026</span> MarketBridge. Demonstration website: partner names, figures and stories are illustrative.</p>
+        <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
       </div>
     </footer>
+
+    <div class="mobile-cta" data-mobile-cta>
+      <a class="button button-primary" href="#contact">Book a free walkthrough</a>
+    </div>
 
     <a
       class="whatsapp-button"
@@ -348,7 +425,7 @@
       rel="noopener noreferrer"
       aria-label="Chat with MarketBridge on WhatsApp"
     >
-      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.1 19.8L3.2 29l6.4-1.7A13 13 0 1 0 16 3Zm0 23.6a10.5 10.5 0 0 1-5.4-1.5l-.4-.2-3.8 1 1-3.7-.3-.4A10.5 10.5 0 1 1 16 26.6Zm5.8-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.6-1.6 9.6 9.6 0 0 1-1.8-2.2c-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2.1-.4 0-.6l-1-2.4c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.9 1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.4-.2-.7-.4Z"/></svg>
+      <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 3a13 13 0 0 0-11.1 19.8L3.2 29l6.4-1.7A13 13 0 1 0 16 3Zm0 23.6a10.5 10.5 0 0 1-5.4-1.5l-.4-.2-3.8 1 1-3.7-.3-.4A10.5 10.5 0 1 1 16 26.6Zm5.8-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.6-1.6 9.6 9.6 0 0 1-1.8-2.2c-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2.1-.4 0-.6l-1-2.4c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.9 1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.4-.2-.7-.4Z"/></svg>
     </a>
   </body>
 </html>

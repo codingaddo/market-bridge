@@ -24,15 +24,32 @@ If the Netlify site name is different, update the canonical link, `og:url` and t
 - **reCAPTCHA: off** (current setting). Formspree only accepts AJAX submissions with reCAPTCHA off, and this also removes its CAPTCHA page and "free quota exceeded" warning. The honeypot and Formspree's automatic spam filtering stay active.
 - If reCAPTCHA is turned back on, the script falls back to a normal form post, so no enquiry is lost. Visitors then pass through Formspree's CAPTCHA page.
 
-## Page structure
+## Design
 
-Dark hero with a sample dashboard (HTML, CSS and inline SVG), keyword ticker, benefits, four-step process, trust points, call-to-action band, contact form and footer. A round WhatsApp button is fixed to the bottom-right corner.
+"The honest receipt": calm porcelain surfaces, one cedi-green accent, system fonts, and monospace figures for every amount. The logo is a lowercase m drawn as two bridge arches with a gold coin (`assets/favicon.svg`, also inline in the header and footer).
+
+Page order:
+1. Floating capsule navigation
+2. Hero with a printed daily receipt
+3. Partner associations
+4. Features (bento)
+5. How it works (the one dark band)
+6. Stories: stats and testimonials
+7. Call-to-action panel
+8. FAQ
+9. Contact form
+10. Footer
+
+Partner names, figures and testimonials are illustrative, and the footer says so.
 
 ## Motion
 
 - Below-the-fold content fades and slides in once, using `IntersectionObserver`. Only opacity and transform are animated.
 - Setup runs after the `load` event, and only elements that start below the viewport are hidden. Without JavaScript, everything is visible.
-- `prefers-reduced-motion` turns off reveals, the chart animation and the ticker.
+- The hero receipt prints line by line on load (CSS only).
+- The floating nav compacts after the first scroll, tucks away while scrolling down and returns on scroll up. A soft pill marks the section in view.
+- On phones, a "Book a free walkthrough" bar slides up after the hero and hides near the contact form and footer.
+- `prefers-reduced-motion` turns off all of these animations.
 
 ## Local preview
 
