@@ -46,6 +46,35 @@ if ('IntersectionObserver' in window) {
     if (header) header.classList.toggle('is-scrolled', !entry.isIntersecting);
   }).observe(sentinel);
 
+  /* Adaptive glass: watch a thin band at the top of the viewport (where the
+     capsule floats) and switch to the smoky variant over dark sections. */
+  const darkSections = document.querySelectorAll('[data-nav-dark]');
+  if (header && darkSections.length) {
+    const underNav = new Set();
+    let bandObserver = null;
+
+    const watchBand = () => {
+      if (bandObserver) bandObserver.disconnect();
+      underNav.clear();
+      const bandBottom = Math.max(window.innerHeight - 52, 0);
+      bandObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) underNav.add(entry.target);
+          else underNav.delete(entry.target);
+        });
+        header.classList.toggle('on-dark', underNav.size > 0);
+      }, { rootMargin: `-40px 0px -${bandBottom}px 0px` });
+      darkSections.forEach((section) => bandObserver.observe(section));
+    };
+
+    watchBand();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(watchBand, 200);
+    });
+  }
+
   /* Floating nav: tucks away while scrolling down, returns on any scroll up.
      It stays put while the menu is open, while it has keyboard focus, and
      briefly after a nav link is used. */

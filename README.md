@@ -47,7 +47,7 @@ Partner names, figures and testimonials are illustrative, and the footer says so
 - Below-the-fold content fades and slides in once, using `IntersectionObserver`. Only opacity and transform are animated.
 - Setup runs after the `load` event, and only elements that start below the viewport are hidden. Without JavaScript, everything is visible.
 - The hero receipt prints line by line on load (CSS only).
-- The floating nav compacts after the first scroll, tucks away while scrolling down and returns on scroll up. A soft pill marks the section in view.
+- The floating nav is frosted glass: the page shows through it, and it turns smoky with light text over the dark section. It compacts after the first scroll, tucks away while scrolling down, returns on scroll up, and a soft pill marks the section in view. Nav links land sections flush with the top of the window, so the glass always floats over the section you chose.
 - On phones, a "Book a free walkthrough" bar slides up after the hero and hides near the contact form and footer.
 - `prefers-reduced-motion` turns off all of these animations.
 
