@@ -1,6 +1,6 @@
 # MarketBridge sample landing page
 
-A lightweight, mobile-first demonstration website for a Ghana-focused financial record-keeping service for traders and small businesses. It is built with semantic HTML, CSS and minimal vanilla JavaScript. It deploys directly to Netlify with no build step.
+A lightweight, mobile-first demonstration website for a Ghana-focused financial record-keeping service for traders and small businesses. It is built with semantic HTML, CSS and minimal vanilla JavaScript. It deploys to Cloudflare Pages or Netlify with no build step.
 
 ## Configuration
 
@@ -9,9 +9,9 @@ A lightweight, mobile-first demonstration website for a Ghana-focused financial 
 | Contact form | Formspree, `https://formspree.io/f/xzeeovrd` |
 | WhatsApp | `+233551817972` (`https://wa.me/233551817972`) |
 | Success page | `thanks.html` (also served at `/thank-you`) |
-| Canonical URL | `https://marketbridge-sample.netlify.app/` |
+| Canonical URL | `https://marketbridge-sample.pages.dev/` |
 
-If the Netlify site name is different, update the canonical link, `og:url` and the JSON-LD `url` in `index.html` to the live address.
+If the live address is different, update the canonical link, `og:url` and the JSON-LD `url` and `logo` in `index.html`.
 
 ## Contact form and spam protection
 
@@ -57,14 +57,22 @@ Partner names, figures and testimonials are illustrative, and the footer says so
 npx serve .
 ```
 
-## Netlify deployment
+## Deployment
 
-Connect the GitHub repository to Netlify:
+No build step. The publish directory is the repository root.
 
-- Build command: none
-- Publish directory: `.` (repository root)
+### Cloudflare Pages (current)
 
-`netlify.toml` sets the security headers (CSP, HSTS, nosniff, frame denial, referrer and permissions policies) and the cache rules.
+- Project name: `marketbridge-sample` (gives `marketbridge-sample.pages.dev`)
+- Framework preset: None. Build command: empty. Build output directory: `/`
+- `_headers` sets the security headers (CSP, HSTS, nosniff, frame denial, referrer and permissions policies) and cache rules. `_redirects` serves `/thank-you`.
+- Leave Cloudflare Web Analytics' automatic script injection off, or add its domain to the CSP in `_headers`.
+
+Command-line deploy: `npx wrangler pages deploy . --project-name marketbridge-sample`
+
+### Netlify
+
+Connect the GitHub repository to Netlify with no build command and `.` as the publish directory. `netlify.toml` carries the same headers and redirect.
 
 ## Performance approach
 
