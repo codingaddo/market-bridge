@@ -1,6 +1,6 @@
 # MarketBridge sample landing page
 
-A lightweight, mobile-first demonstration website for a Ghana-focused financial record-keeping service for traders and small businesses. It is built with semantic HTML, CSS and minimal vanilla JavaScript. It deploys to Cloudflare Pages or Netlify with no build step.
+A lightweight, mobile-first demonstration website for a Ghana-focused financial record-keeping service for traders and small businesses. It is built with semantic HTML, CSS and minimal vanilla JavaScript. It deploys to Netlify (or Cloudflare Pages) with no build step.
 
 ## Configuration
 
@@ -9,7 +9,7 @@ A lightweight, mobile-first demonstration website for a Ghana-focused financial 
 | Contact form | Formspree, `https://formspree.io/f/xzeeovrd` |
 | WhatsApp | `+233551817972` (`https://wa.me/233551817972`) |
 | Success page | `thanks.html` (also served at `/thank-you`) |
-| Canonical URL | `https://marketbridge-sample.pages.dev/` |
+| Canonical URL | `https://marketbridge-sample.netlify.app/` |
 
 If the live address is different, update the canonical link, `og:url` and the JSON-LD `url` and `logo` in `index.html`.
 
@@ -61,18 +61,15 @@ npx serve .
 
 No build step. The publish directory is the repository root.
 
-### Cloudflare Pages (current)
+Headers and the `/thank-you` rewrite live in `_headers` and `_redirects`. Both Netlify and Cloudflare Pages read these files, so they are not repeated in `netlify.toml`, which would send them twice.
 
-- Project name: `marketbridge-sample` (gives `marketbridge-sample.pages.dev`)
-- Framework preset: None. Build command: empty. Build output directory: `/`
-- `_headers` sets the security headers (CSP, HSTS, nosniff, frame denial, referrer and permissions policies) and cache rules. `_redirects` serves `/thank-you`.
-- Leave Cloudflare Web Analytics' automatic script injection off, or add its domain to the CSP in `_headers`.
+### Netlify (current)
 
-Command-line deploy: `npx wrangler pages deploy . --project-name marketbridge-sample`
+Import the GitHub repository (Add new project → Import an existing project → GitHub). Leave the build command empty and set the publish directory to `.` (`netlify.toml` already sets both). Project name: `marketbridge-sample`. Every push to `main` redeploys.
 
-### Netlify
+### Cloudflare Pages (alternative)
 
-Connect the GitHub repository to Netlify with no build command and `.` as the publish directory. `netlify.toml` carries the same headers and redirect.
+Connect the repository with framework preset None, an empty build command and `/` as the output directory, or run `npx wrangler pages deploy . --project-name marketbridge-sample`. If you move hosts, update the canonical, `og:url` and JSON-LD URLs to the new address. Leave Cloudflare Web Analytics' automatic script injection off, or add its domain to the CSP in `_headers`.
 
 ## Performance approach
 

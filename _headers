@@ -1,4 +1,4 @@
-# Cloudflare Pages headers (mirrors netlify.toml).
+# Security and cache headers (read by both Netlify and Cloudflare Pages).
 /*
   Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000; includeSubDomains
