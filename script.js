@@ -29,6 +29,78 @@ if (menuButton && navigation) {
 const year = document.querySelector('#current-year');
 if (year) year.textContent = String(new Date().getFullYear());
 
+/* Scroll reveal: runs once per element. The observer's first report tells us
+   which elements start off screen; only those are hidden and animated, so
+   nothing visible is hidden. Setup waits for the load event so it never
+   forces style or layout work ahead of the first paint. */
+const initReveal = () => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  const items = Array.from(document.querySelectorAll('.reveal'));
+  const footer = document.querySelector('.site-footer');
+  const seen = new WeakSet();
+
+  const finish = (event) => {
+    if (event.propertyName !== 'transform') return;
+    const el = event.currentTarget;
+    el.classList.remove('reveal-pending', 'is-visible');
+    el.style.transitionDelay = '';
+    el.removeEventListener('transitionend', finish);
+  };
+
+  const show = (el) => {
+    observer.unobserve(el);
+    if (!el.classList.contains('reveal-pending') || el.classList.contains('is-visible')) return;
+    el.addEventListener('transitionend', finish);
+    el.classList.add('is-visible');
+  };
+
+  // A fast scroll can carry an element past the viewport between observer
+  // callbacks, so revealing one element also reveals everything above it.
+  const showUpTo = (index) => {
+    for (let i = 0; i <= index; i += 1) show(items[i]);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target;
+        if (el === footer) {
+          if (entry.isIntersecting) showUpTo(items.length - 1);
+          return;
+        }
+        const firstReport = !seen.has(el);
+        seen.add(el);
+
+        if (firstReport) {
+          const rootBottom = entry.rootBounds ? entry.rootBounds.bottom : window.innerHeight;
+          if (entry.isIntersecting || entry.boundingClientRect.top < rootBottom) {
+            observer.unobserve(el); // on screen or already scrolled past: leave it visible
+          } else {
+            const group = el.parentElement.closest('[data-stagger]');
+            if (group && el.parentElement === group) {
+              const index = Array.prototype.indexOf.call(group.children, el);
+              el.style.transitionDelay = `${index * 90}ms`;
+            }
+            el.classList.add('reveal-pending');
+          }
+          return;
+        }
+
+        if (entry.isIntersecting) showUpTo(items.indexOf(el));
+      });
+    },
+    { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+  );
+
+  items.forEach((el) => observer.observe(el));
+  if (footer) observer.observe(footer);
+};
+
+if (document.readyState === 'complete') initReveal();
+else window.addEventListener('load', initReveal, { once: true });
+
 /* Contact form: inline validation plus AJAX submission to Formspree.
    Without JavaScript the form still posts normally and the browser's
    built-in validation applies. */
