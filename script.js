@@ -459,7 +459,8 @@ if (teaser && waButton && 'IntersectionObserver' in window) {
     waButton.addEventListener('animationend', () => waButton.classList.remove('is-nudging'), { once: true });
     setTimeout(() => {
       teaser.hidden = false;
-      requestAnimationFrame(() => requestAnimationFrame(() => teaser.classList.add('is-visible')));
+      void teaser.offsetWidth; // apply the hidden state first so the fade-in transition runs
+      teaser.classList.add('is-visible');
       hideTimer = setTimeout(hide, 60000);
     }, 500);
   };
