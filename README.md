@@ -89,15 +89,13 @@ All visible photos are WebP, generated with [sharp](https://sharp.pixelplumbing.
 | `market-trader-portrait-480.webp` | 480 × 960 | 66,646 B (65.1 KB) | Homepage hero, phones |
 | `market-trader-portrait-768.webp` | 768 × 1536 | 121,172 B (118.3 KB) | Homepage hero, phones and tablets |
 | `market-trader-portrait-1080.webp` | 1080 × 2160 | 190,736 B (186.3 KB) | Homepage hero, 3× phones |
-| `grain-market-480.webp` | 480 × 320 | 26,192 B (25.6 KB) | FAQ photo card (lazy) |
-| `grain-market-768.webp` | 768 × 512 | 58,100 B (56.7 KB) | FAQ photo card (lazy) |
-| `grain-market-1200.webp` | 1200 × 800 | 122,420 B (119.6 KB) | Contact header, 1000 px and up; FAQ card on 2× screens |
+| `grain-market-1200.webp` | 1200 × 800 | 122,420 B (119.6 KB) | Contact header, 1000 px and up |
 | `grain-market-1600.webp` | 1600 × 1067 | 192,044 B (187.5 KB) | Contact header, 1000 px and up |
 | `grain-market-2400.webp` | 2400 × 1600 | 365,600 B (357.0 KB) | Contact header, large or 2× screens |
 | `grain-market-portrait-480.webp` | 480 × 960 | 61,364 B (59.9 KB) | Contact header, phones |
 | `grain-market-portrait-768.webp` | 768 × 1536 | 135,432 B (132.3 KB) | Contact header, phones and tablets |
 | `grain-market-portrait-1080.webp` | 1080 × 2160 | 235,672 B (230.1 KB) | Contact header, 3× phones |
-| `fish-seller-480.webp` | 480 × 320 | 28,034 B (27.4 KB) | Features photo and Contact card (lazy) |
+| `fish-seller-480.webp` | 480 × 320 | 28,034 B (27.4 KB) | Features photo (lazy) |
 | `fish-seller-768.webp` | 768 × 512 | 52,070 B (50.8 KB) | Features photo (lazy) |
 | `fish-seller-1200.webp` | 1200 × 800 | 91,268 B (89.1 KB) | Features photo (lazy) |
 | `fish-seller-1600.webp` | 1600 × 1067 | 130,002 B (127.0 KB) | Features photo (lazy) |
@@ -189,11 +187,11 @@ Homepage order:
 5. Features: intro beside a photo, then four small tiles
 6. How it works
 7. Stories: centred heading, a centred row of three figures, then the market photo beside a featured quote with two shorter quotes beneath
-8. FAQ: searchable accordion beside a photo card with a "still have a question?" WhatsApp fallback and live opening-hours status
+8. FAQ: searchable accordion beside a "still have a question?" panel with a WhatsApp fallback and live opening-hours status
 9. Contact call-to-action
 10. Footer
 
-Contact page order: edge-to-edge photo header (centred heading, intro and one line of facts), then the ways to reach us on the left as a photo card (WhatsApp with a live open/closed status, hours and offices as icon rows) with "what happens next" beneath it, and the form card on the right. On phones the form comes first.
+Contact page order: edge-to-edge photo header (centred heading, intro and one line of facts), then the ways to reach us on the left (WhatsApp with a live open/closed status, hours and offices as icon rows, then "what happens next") and the form card on the right. On phones the form comes first.
 
 Partner names, figures and testimonials are illustrative, and the footer says so on every page.
 

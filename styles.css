@@ -327,15 +327,13 @@ h1 .accent { color: var(--green); white-space: nowrap; }
 html:not(.js) .faq-search { display: none; }
 .faq-empty { margin-top: var(--sp-3); color: var(--ink-2); font-size: var(--fs-small); }
 .faq-aside { align-self: start; }
-/* Photo card: a real market photo with a short, useful panel beneath it. */
-.photo-card { overflow: hidden; background: var(--surface); border: 1px solid rgba(21, 32, 28, .06); border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); }
-.photo-card img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 45%; background: #d8d2c4; }
-.photo-card-body { display: grid; gap: .75rem; justify-items: start; padding: var(--sp-3); }
-.photo-card-body h3 { font-size: 1.15rem; letter-spacing: -.02em; }
-.photo-card-body p:not(.hours-status) { color: var(--ink-2); font-size: var(--fs-small); }
-.photo-card-body .button { margin-top: .25rem; }
-.photo-card-body .text-link { color: var(--green-ink); font-size: var(--fs-small); }
-.photo-card .contact-methods { margin: 0; padding: var(--sp-3); gap: var(--sp-3); }
+/* FAQ fallback: a quiet panel with the fastest way to ask. */
+.faq-card { padding: var(--sp-4) var(--sp-3); background: var(--green-tint); border-radius: var(--radius-lg); }
+.faq-card-body { display: grid; gap: .75rem; justify-items: start; }
+.faq-card-body h3 { font-size: 1.15rem; letter-spacing: -.02em; }
+.faq-card-body p:not(.hours-status) { color: var(--ink-2); font-size: var(--fs-small); }
+.faq-card-body .button { margin-top: .25rem; }
+.faq-card-body .text-link { color: var(--green-ink); font-size: var(--fs-small); }
 .faq-list { border-top: 1px solid var(--line); }
 .faq-list details { border-bottom: 1px solid var(--line); }
 .faq-list summary { position: relative; display: block; padding: 1.1rem 2.75rem 1.1rem 0; font-family: var(--font-display); font-size: 1rem; font-weight: 650; letter-spacing: -.01em; list-style: none; cursor: pointer; }
@@ -384,8 +382,7 @@ html:not(.js) .faq-search { display: none; }
 .contact-layout .contact-form { order: -1; }
 .contact-info h2 { max-width: 16ch; font-size: clamp(1.5rem, 3.5vw, 2rem); }
 .contact-info-intro { max-width: 28rem; margin-top: var(--sp-2); color: var(--ink-2); font-size: var(--fs-small); }
-.contact-methods { display: grid; gap: var(--sp-3); margin: 0; padding: 0; list-style: none; }
-.contact-info .photo-card { margin-top: var(--sp-4); }
+.contact-methods { display: grid; gap: var(--sp-3); margin: var(--sp-4) 0 0; padding: 0; list-style: none; }
 .contact-methods li { display: grid; grid-template-columns: 40px 1fr; column-gap: .9rem; align-items: start; }
 .contact-methods div { display: grid; gap: .2rem; justify-items: start; }
 .contact-methods strong { font-size: var(--fs-small); font-weight: 650; }
@@ -540,7 +537,6 @@ html:not(.js) .faq-search { display: none; }
   .step h3 { margin-top: 0; }
   .faq-grid { grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem); gap: clamp(3rem, 6vw, 5rem); align-items: start; }
   .faq-aside { position: sticky; top: 110px; }
-  .photo-card img { aspect-ratio: 4 / 3; }
   .duo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2.5rem, 5vw, 4rem); }
   /* Photos take a shorter 3:2 frame beside text, and the stats column fills the photo's height. */
   .duo-photo img { aspect-ratio: 3 / 2; }
