@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://marketbridge-sample.netlify.app/sitemap.xml

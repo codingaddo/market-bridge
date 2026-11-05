@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js');
+
 const menuButton = document.querySelector('.menu-button');
 const navigation = document.querySelector('.primary-nav');
 
@@ -299,6 +301,22 @@ const initReveal = () => {
   if (footer) observer.observe(footer);
 };
 
+/* The sample receipt prints line by line once it scrolls into view
+   (without JavaScript it simply prints on load). */
+const receipt = document.querySelector('.receipt-wrap');
+if (receipt) {
+  if ('IntersectionObserver' in window) {
+    const printer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      receipt.classList.add('is-printed');
+      printer.disconnect();
+    }, { threshold: 0.3 });
+    printer.observe(receipt);
+  } else {
+    receipt.classList.add('is-printed');
+  }
+}
+
 if (document.readyState === 'complete') initReveal();
 else window.addEventListener('load', initReveal, { once: true });
 
@@ -417,6 +435,24 @@ if (form && window.fetch) {
   });
 }
 
+/* Opening hours in Ghana (GMT, no daylight saving): Monday to Saturday, 8:00–18:00. */
+const hoursNow = () => {
+  const now = new Date();
+  const day = now.getUTCDay();
+  const hour = now.getUTCHours();
+  const open = day >= 1 && day <= 6 && hour >= 8 && hour < 18;
+  const nextIsMonday = day === 0 || (day === 6 && hour >= 18);
+  const opensToday = day >= 1 && day <= 6 && hour < 8;
+  return { open, nextIsMonday, opensToday };
+};
+
+// Contact page: live open or closed label next to the WhatsApp option.
+document.querySelectorAll('[data-hours-status]').forEach((el) => {
+  const { open, nextIsMonday, opensToday } = hoursNow();
+  el.classList.toggle('is-open', open);
+  el.textContent = open ? 'Open now · Monday to Saturday, 8:00–18:00' : `Closed now · back ${nextIsMonday ? 'Monday' : opensToday ? 'today' : 'tomorrow'} at 8:00`;
+});
+
 /* WhatsApp greeting: on every page load, after ~5 s or once the visitor
    scrolls past the hero, the button breathes once and a short message slides
    out. It stays for up to 60 s or until closed with × (for that page view). */
@@ -424,18 +460,12 @@ const teaser = document.querySelector('.wa-teaser');
 const waButton = document.querySelector('.whatsapp-button');
 
 if (teaser && waButton && 'IntersectionObserver' in window) {
-  // Live status from opening hours in Ghana (GMT, no daylight saving): Mon–Sat, 8:00–18:00.
+  // Live status from the opening hours above.
   const status = teaser.querySelector('[data-wa-status]');
   if (status) {
-    const now = new Date();
-    const day = now.getUTCDay();
-    const hour = now.getUTCHours();
-    const open = day >= 1 && day <= 6 && hour >= 8 && hour < 18;
+    const { open, nextIsMonday } = hoursNow();
     status.classList.toggle('is-online', open);
-    if (!open) {
-      const nextIsMonday = day === 0 || (day === 6 && hour >= 18);
-      status.textContent = nextIsMonday ? 'Replies Monday from 8:00' : 'Replies from 8:00';
-    }
+    if (!open) status.textContent = nextIsMonday ? 'Replies Monday from 8:00' : 'Replies from 8:00';
   }
 
   let shown = false;
@@ -480,7 +510,8 @@ if (teaser && waButton && 'IntersectionObserver' in window) {
     heroObserver.observe(hero);
   }
 
-  const contact = document.querySelector('#contact');
+  // Step aside wherever a contact form is on screen.
+  const contact = document.querySelector('.contact-form');
   if (contact) {
     new IntersectionObserver(([entry]) => {
       contactVisible = entry.isIntersecting;

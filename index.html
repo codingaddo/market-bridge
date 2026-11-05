@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f5f6f3" />
-    <title>MarketBridge | Simple financial records for Ghanaian traders</title>
+    <title>MarketBridge | Financial records for Ghanaian traders</title>
     <meta
       name="description"
       content="MarketBridge helps Ghanaian traders and small businesses record daily sales, expenses and mobile money on their phone, with a clear weekly summary in plain words."
@@ -15,15 +15,43 @@
     <meta property="og:site_name" content="MarketBridge" />
     <meta property="og:locale" content="en_GH" />
     <meta property="og:url" content="https://marketbridge-sample.netlify.app/" />
-    <meta property="og:title" content="MarketBridge | Simple financial records for Ghanaian traders" />
+    <meta property="og:title" content="MarketBridge | Financial records for Ghanaian traders" />
     <meta
       property="og:description"
       content="Record sales, expenses and mobile money in a few minutes a day, then see exactly where every cedi goes."
     />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="https://marketbridge-sample.netlify.app/assets/og/marketbridge-og.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="MarketBridge logo and the line “Know where every cedi goes” beside a photo of a market trader selling plantain in Ghana." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MarketBridge | Financial records for Ghanaian traders" />
+    <meta name="twitter:description" content="Record sales, expenses and mobile money in a few minutes a day, then see exactly where every cedi goes." />
+    <meta name="twitter:image" content="https://marketbridge-sample.netlify.app/assets/og/marketbridge-og.jpg" />
+    <meta name="twitter:image:alt" content="MarketBridge logo and the line “Know where every cedi goes” beside a photo of a market trader selling plantain in Ghana." />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=20261105" />
-    <script src="script.js?v=20261105" defer></script>
+    <!-- Hero photo preload: mirrors the <picture> sources (wide frame from 1000px, portrait crop below). -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      media="(min-width: 1000px)"
+      imagesrcset="assets/img/market-trader-1200.webp 1200w, assets/img/market-trader-1600.webp 1600w, assets/img/market-trader-2400.webp 2400w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      media="(max-width: 999px)"
+      imagesrcset="assets/img/market-trader-portrait-480.webp 480w, assets/img/market-trader-portrait-768.webp 768w, assets/img/market-trader-portrait-1080.webp 1080w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+    <link rel="stylesheet" href="styles.css?v=20261105d" />
+    <script src="script.js?v=20261105d" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -33,11 +61,20 @@
             "name": "MarketBridge",
             "url": "https://marketbridge-sample.netlify.app/",
             "logo": "https://marketbridge-sample.netlify.app/assets/favicon.svg",
+            "image": "https://marketbridge-sample.netlify.app/assets/og/marketbridge-og.jpg",
             "description": "Financial record-keeping for Ghanaian traders and small businesses: daily sales, expenses, mobile money and weekly summaries.",
             "telephone": "+233551817972",
             "areaServed": { "@type": "Country", "name": "Ghana" },
             "address": { "@type": "PostalAddress", "addressCountry": "GH" },
-            "openingHours": "Mo-Sa 08:00-18:00"
+            "openingHours": "Mo-Sa 08:00-18:00",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer service",
+              "telephone": "+233551817972",
+              "url": "https://marketbridge-sample.netlify.app/contact.html",
+              "areaServed": "GH",
+              "availableLanguage": "en"
+            }
           },
           {
             "@type": "FAQPage",
@@ -78,15 +115,36 @@
           <a href="#how-it-works">How it works</a>
           <a href="#trust">Stories</a>
           <a href="#faq">FAQ</a>
-          <a class="nav-cta" href="#contact">Book a walkthrough</a>
+          <a class="nav-cta" href="contact.html">Contact</a>
         </nav>
       </div>
     </header>
 
     <main id="main-content">
-      <section id="top" class="hero" aria-labelledby="hero-title">
-        <div class="container hero-grid">
-          <div class="hero-copy">
+      <section id="top" class="hero" aria-labelledby="hero-title" data-nav-dark>
+        <div class="hero-stage">
+          <picture class="hero-photo">
+            <source
+              media="(min-width: 1000px)"
+              type="image/webp"
+              srcset="assets/img/market-trader-1200.webp 1200w, assets/img/market-trader-1600.webp 1600w, assets/img/market-trader-2400.webp 2400w"
+              sizes="100vw"
+              width="2400"
+              height="1600"
+            />
+            <img
+              src="assets/img/market-trader-portrait-768.webp"
+              srcset="assets/img/market-trader-portrait-480.webp 480w, assets/img/market-trader-portrait-768.webp 768w, assets/img/market-trader-portrait-1080.webp 1080w"
+              sizes="100vw"
+              width="1080"
+              height="2160"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt="A market trader in Ghana at her stall, arranging bunches of green and ripe plantain beside bowls of produce and shelves of cooking oil."
+            />
+          </picture>
+          <div class="container hero-copy">
             <p class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Bookkeeping for traders in Ghana</p>
             <h1 id="hero-title">Know where <span class="accent">every cedi</span> goes.</h1>
             <p class="hero-intro">
@@ -94,7 +152,7 @@
               into a clear weekly summary, written in plain words.
             </p>
             <div class="hero-actions">
-              <a class="button button-primary" href="#contact">Book a free walkthrough <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="button button-primary" href="contact.html">Book a free walkthrough <span class="arrow" aria-hidden="true">→</span></a>
               <a class="button button-quiet" href="https://wa.me/233551817972?text=Hello%20MarketBridge%2C%20I%20would%20like%20to%20make%20an%20enquiry." target="_blank" rel="noopener noreferrer">
                 <svg class="wa-glyph" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 3a13 13 0 0 0-11.1 19.8L3.2 29l6.4-1.7A13 13 0 1 0 16 3Zm0 23.6a10.5 10.5 0 0 1-5.4-1.5l-.4-.2-3.8 1 1-3.7-.3-.4A10.5 10.5 0 1 1 16 26.6Zm5.8-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.6 8.6 0 0 1-2.6-1.6 9.6 9.6 0 0 1-1.8-2.2c-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2.1-.4 0-.6l-1-2.4c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.9 1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.4-.2-.7-.4Z"/></svg>
                 Chat on WhatsApp
@@ -106,8 +164,44 @@
               <li>Association supported</li>
             </ul>
           </div>
+        </div>
+      </section>
 
-          <figure class="receipt-wrap">
+      <section class="partners" aria-labelledby="partners-title">
+        <div class="container partners-inner">
+          <h2 id="partners-title" class="partners-label">Working with traders’ associations across Ghana</h2>
+          <ul class="partner-list">
+            <li>Kaneshie Traders’ Union</li>
+            <li>Adum Shop Owners Network</li>
+            <li>Tema Market Women’s Collective</li>
+            <li>Techiman Grain Sellers</li>
+            <li>Ho Provisions Guild</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section daybook" aria-labelledby="daybook-title">
+        <div class="container duo">
+          <div class="section-head reveal">
+            <p class="label">Your day on one page</p>
+            <h2 id="daybook-title">Every sale and expense, saved as you go.</h2>
+            <p>Each entry joins a running record of the day, so you always know your takings, your costs and what is left.</p>
+            <ul class="mini-features" aria-label="What the daily record shows">
+              <li>
+                <span class="mini-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3" /><circle cx="12" cy="12" r="2.5" /></svg></span>
+                <div><strong>Cash and MoMo together</strong><span>Every payment type in one list, so nothing slips through.</span></div>
+              </li>
+              <li>
+                <span class="mini-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14" /></svg></span>
+                <div><strong>Totals worked out for you</strong><span>Sales, expenses and today's profit, added up as you go.</span></div>
+              </li>
+              <li>
+                <span class="mini-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18V9m5 9V5m5 13v-7m5 7V3" /></svg></span>
+                <div><strong>Your week at a glance</strong><span>A small chart shows which days were strong.</span></div>
+              </li>
+            </ul>
+          </div>
+          <figure class="receipt-wrap reveal">
             <div class="receipt">
               <div class="receipt-head">
                 <svg class="receipt-logo" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
@@ -152,24 +246,27 @@
         </div>
       </section>
 
-      <section class="partners" aria-labelledby="partners-title">
-        <div class="container partners-inner">
-          <h2 id="partners-title" class="partners-label">Working with traders’ associations across Ghana</h2>
-          <ul class="partner-list">
-            <li>Kaneshie Traders’ Union</li>
-            <li>Adum Shop Owners Network</li>
-            <li>Tema Market Women’s Collective</li>
-            <li>Techiman Grain Sellers</li>
-            <li>Ho Provisions Guild</li>
-          </ul>
-        </div>
-      </section>
-
       <section id="benefits" class="section features" aria-labelledby="benefits-title">
         <div class="container">
-          <div class="section-head reveal">
-            <p class="label">Features</p>
-            <h2 id="benefits-title">Everything a trading day needs. Nothing it doesn’t.</h2>
+          <div class="duo duo-intro">
+            <div class="section-head reveal">
+              <p class="label">Features</p>
+              <h2 id="benefits-title">Everything a trading day needs. Nothing it doesn’t.</h2>
+              <p>Built for the stall, not the office: quick enough to use between customers, and clear enough to read at a glance.</p>
+            </div>
+            <figure class="duo-photo reveal">
+              <img
+                src="assets/img/fish-seller-768.webp"
+                srcset="assets/img/fish-seller-480.webp 480w, assets/img/fish-seller-768.webp 768w, assets/img/fish-seller-1200.webp 1200w, assets/img/fish-seller-1600.webp 1600w"
+                sizes="(min-width: 1208px) 548px, (min-width: 920px) calc(50vw - 56px), (min-width: 560px) calc(100vw - 48px), calc(100vw - 32px)"
+                width="1600"
+                height="1067"
+                loading="lazy"
+                decoding="async"
+                alt="A trader at Kaneshie Market in Accra, in a blue shirt and red apron, arranging smoked fish in a steel bowl."
+              />
+              <figcaption>Kaneshie Market, Accra.</figcaption>
+            </figure>
           </div>
 
           <div class="bento" data-stagger>
@@ -246,19 +343,32 @@
 
       <section id="trust" class="section stories" aria-labelledby="stories-title">
         <div class="container">
-          <div class="section-head reveal">
+          <div class="section-head section-head-center reveal">
             <p class="label">Stories</p>
             <h2 id="stories-title">Traders who stopped guessing.</h2>
           </div>
 
-          <dl class="stats" data-stagger>
+          <dl class="stats stats-row" data-stagger>
             <div class="stat reveal"><dt>Traders recording daily</dt><dd>2,400+</dd></div>
             <div class="stat reveal"><dt>Associations onboard</dt><dd>18</dd></div>
             <div class="stat reveal"><dt>Minutes to record a day</dt><dd>4</dd></div>
           </dl>
 
-          <div class="quotes" data-stagger>
-            <figure class="quote reveal">
+          <div class="story-grid" data-stagger>
+            <figure class="story-photo reveal">
+              <img
+                src="assets/img/textiles-768.webp"
+                srcset="assets/img/textiles-480.webp 480w, assets/img/textiles-768.webp 768w, assets/img/textiles-1200.webp 1200w, assets/img/textiles-1600.webp 1600w"
+                sizes="(min-width: 1208px) 548px, (min-width: 920px) calc(50vw - 56px), (min-width: 560px) calc(100vw - 48px), calc(100vw - 32px)"
+                width="1600"
+                height="1067"
+                loading="lazy"
+                decoding="async"
+                alt="Rows of folded printed cloth in bold patterns of orange, teal, yellow and purple on a market stall."
+              />
+              <figcaption>Printed cloth on sale at Kejetia Market, Kumasi.</figcaption>
+            </figure>
+            <figure class="quote quote-featured reveal">
               <blockquote><p>“I kept everything in my head and an exercise book. Now I can see which goods actually make me money.”</p></blockquote>
               <figcaption><span class="avatar" aria-hidden="true">AM</span><span><strong>Akosua Mensah</strong>Provisions seller, Kaneshie, Accra</span></figcaption>
             </figure>
@@ -274,27 +384,12 @@
         </div>
       </section>
 
-      <section class="cta-section" aria-labelledby="cta-title">
-        <div class="container">
-          <div class="cta-panel reveal">
-            <div>
-              <h2 id="cta-title">Your first week of clear records starts with one conversation.</h2>
-              <p>Book a free 20-minute walkthrough. We will set up your categories with you, on your own phone.</p>
-            </div>
-            <div class="cta-actions">
-              <a class="button button-light" href="#contact">Book a walkthrough <span class="arrow" aria-hidden="true">→</span></a>
-              <a class="text-link text-link-light" href="https://wa.me/233551817972?text=Hello%20MarketBridge%2C%20I%20would%20like%20to%20book%20a%20walkthrough." target="_blank" rel="noopener noreferrer">Or chat on WhatsApp <span class="arrow" aria-hidden="true">→</span></a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section id="faq" class="section faq" aria-labelledby="faq-title">
         <div class="container faq-grid">
           <div class="section-head reveal">
             <p class="label">FAQ</p>
             <h2 id="faq-title">Questions traders ask us.</h2>
-            <p>Something else on your mind? <a class="inline-link" href="#contact">Send us a message</a>.</p>
+            <p>Something else on your mind? <a class="inline-link" href="contact.html">Send us a message</a>.</p>
           </div>
           <div class="faq-list reveal">
             <details name="faq">
@@ -325,54 +420,18 @@
         </div>
       </section>
 
-      <section id="contact" class="section contact" aria-labelledby="contact-title">
-        <div class="container contact-grid">
-          <div class="contact-copy reveal">
-            <p class="label">Contact</p>
-            <h2 id="contact-title">Tell us about your business.</h2>
-            <p>Share what you sell and how you keep records today. We reply within one working day with the next practical step.</p>
-            <ul class="contact-details">
-              <li>
-                <span class="cd-label">WhatsApp</span>
-                <a class="inline-link" href="https://wa.me/233551817972?text=Hello%20MarketBridge%2C%20I%20would%20like%20to%20make%20an%20enquiry." target="_blank" rel="noopener noreferrer">+233 55 181 7972</a>
-              </li>
-              <li><span class="cd-label">Hours</span><span>Monday to Saturday, 8:00 to 18:00</span></li>
-              <li><span class="cd-label">Offices</span><span>Accra and Kumasi</span></li>
-            </ul>
+      <section class="cta-section" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-panel reveal">
+            <div>
+              <h2 id="cta-title">Your first week of clear records starts with one conversation.</h2>
+              <p>Book a free 20-minute walkthrough. We will set up your categories with you, on your own phone.</p>
+            </div>
+            <div class="cta-actions">
+              <a class="button button-light" href="contact.html">Book a walkthrough <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="text-link text-link-light" href="https://wa.me/233551817972?text=Hello%20MarketBridge%2C%20I%20would%20like%20to%20book%20a%20walkthrough." target="_blank" rel="noopener noreferrer">Or chat on WhatsApp <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
           </div>
-
-          <form class="contact-form" action="https://formspree.io/f/xzeeovrd" method="POST">
-            <input type="hidden" name="_subject" value="New MarketBridge website enquiry" />
-            <p class="form-required-note">Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required.</p>
-            <div class="form-field">
-              <label for="name">Full name <span class="required" aria-hidden="true">*</span></label>
-              <input id="name" name="name" type="text" autocomplete="name" maxlength="100" required aria-describedby="name-error" />
-              <p class="field-error" id="name-error"></p>
-            </div>
-            <div class="form-field">
-              <label for="email">Email address <span class="required" aria-hidden="true">*</span></label>
-              <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required aria-describedby="email-error" />
-              <p class="field-error" id="email-error"></p>
-            </div>
-            <div class="form-field">
-              <label for="phone">Phone number <span class="optional">(optional)</span></label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" aria-describedby="phone-error" />
-              <p class="field-error" id="phone-error"></p>
-            </div>
-            <div class="form-field">
-              <label for="message">How can we help? <span class="required" aria-hidden="true">*</span></label>
-              <textarea id="message" name="message" rows="5" maxlength="3000" required aria-describedby="message-error"></textarea>
-              <p class="field-error" id="message-error"></p>
-            </div>
-            <!-- Honeypot: the hidden attribute (display:none) keeps people and browser autofill out; simple bots still fill it. -->
-            <div class="hp-field" hidden>
-              <label for="hp-check">Do not complete</label>
-              <input id="hp-check" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
-            </div>
-            <button class="button button-primary form-submit" type="submit">Send enquiry <span class="arrow" aria-hidden="true">→</span></button>
-            <div class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></div>
-            <p class="form-privacy">Your details are only used to reply to this enquiry.</p>
-          </form>
         </div>
       </section>
     </main>
@@ -403,18 +462,21 @@
           <h2>Get in touch</h2>
           <ul>
             <li><a href="https://wa.me/233551817972" target="_blank" rel="noopener noreferrer">WhatsApp +233 55 181 7972</a></li>
-            <li><a href="#contact">Book a walkthrough</a></li>
+            <li><a href="contact.html">Contact and walkthroughs</a></li>
             <li>Mon–Sat, 8:00–18:00</li>
           </ul>
         </div>
       </div>
       <div class="container footer-bottom">
-        <p>© <span id="current-year">2026</span> MarketBridge. Demonstration website: partner names, figures and stories are illustrative.</p>
+        <div class="footer-notes">
+          <p>© <span id="current-year">2026</span> MarketBridge. Demonstration website: partner names, figures and stories are illustrative.</p>
+          <!-- Photo attribution (CC BY-SA, via Wikimedia Commons): see README.md, "Photographs". -->
+        </div>
         <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
       </div>
     </footer>
 
-    <!-- WhatsApp greeting: shown once per visit by script.js; stays hidden without JavaScript. -->
+    <!-- WhatsApp greeting: shown on every page load by script.js; stays hidden without JavaScript. -->
     <div class="wa-teaser" hidden>
       <a
         class="wa-teaser-link"
