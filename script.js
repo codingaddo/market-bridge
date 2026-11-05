@@ -416,3 +416,82 @@ if (form && window.fetch) {
     }
   });
 }
+
+/* WhatsApp greeting: on every page load, after ~5 s or once the visitor
+   scrolls past the hero, the button breathes once and a short message slides
+   out. It stays for up to 60 s or until closed with × (for that page view). */
+const teaser = document.querySelector('.wa-teaser');
+const waButton = document.querySelector('.whatsapp-button');
+
+if (teaser && waButton && 'IntersectionObserver' in window) {
+  // Live status from opening hours in Ghana (GMT, no daylight saving): Mon–Sat, 8:00–18:00.
+  const status = teaser.querySelector('[data-wa-status]');
+  if (status) {
+    const now = new Date();
+    const day = now.getUTCDay();
+    const hour = now.getUTCHours();
+    const open = day >= 1 && day <= 6 && hour >= 8 && hour < 18;
+    status.classList.toggle('is-online', open);
+    if (!open) {
+      const nextIsMonday = day === 0 || (day === 6 && hour >= 18);
+      status.textContent = nextIsMonday ? 'Replies Monday from 8:00' : 'Replies from 8:00';
+    }
+  }
+
+  let shown = false;
+  let hideTimer;
+  let contactVisible = false;
+
+  const hide = () => {
+    clearTimeout(hideTimer);
+    if (teaser.hidden) return;
+    teaser.classList.remove('is-visible');
+    const done = () => { teaser.hidden = true; };
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) done();
+    else teaser.addEventListener('transitionend', done, { once: true });
+  };
+
+  const show = () => {
+    const menuOpen = menuButton && menuButton.getAttribute('aria-expanded') === 'true';
+    if (shown || contactVisible || menuOpen) return;
+    shown = true;
+    waButton.classList.add('is-nudging');
+    waButton.addEventListener('animationend', () => waButton.classList.remove('is-nudging'), { once: true });
+    setTimeout(() => {
+      teaser.hidden = false;
+      requestAnimationFrame(() => requestAnimationFrame(() => teaser.classList.add('is-visible')));
+      hideTimer = setTimeout(hide, 60000);
+    }, 500);
+  };
+
+  const startTimer = () => setTimeout(show, 5000);
+  if (document.readyState === 'complete') startTimer();
+  else window.addEventListener('load', startTimer, { once: true });
+
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+        heroObserver.disconnect();
+        show();
+      }
+    });
+    heroObserver.observe(hero);
+  }
+
+  const contact = document.querySelector('#contact');
+  if (contact) {
+    new IntersectionObserver(([entry]) => {
+      contactVisible = entry.isIntersecting;
+      if (contactVisible) hide();
+    }, { threshold: 0.15 }).observe(contact);
+  }
+
+  teaser.querySelector('.wa-teaser-close').addEventListener('click', hide);
+  teaser.querySelector('.wa-teaser-link').addEventListener('click', hide);
+  waButton.addEventListener('click', hide);
+  if (menuButton) menuButton.addEventListener('click', hide);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !teaser.hidden) hide();
+  });
+}

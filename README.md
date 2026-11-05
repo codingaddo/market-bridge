@@ -51,6 +51,7 @@ Partner names, figures and testimonials are illustrative, and the footer says so
 - On phones, the menu opens as a glass panel that fades and slides in. It closes on a link tap, a tap outside it, scrolling, or Escape.
 - FAQ answers slide open and closed, and only one is open at a time. Without JavaScript, `<details name="faq">` keeps the one-at-a-time behaviour without animation.
 - The WhatsApp button sits above the "Powered by Netlify" badge that Netlify adds on free plans. `_headers` allows that badge's inline script by hash, plus inline styles.
+- WhatsApp greeting: on every page load, after about 5 seconds or once the visitor scrolls past the hero, the WhatsApp button pulses once and a small glass card says "Questions about your records? Chat with us on WhatsApp." The status line shows "Online now" during opening hours (Monday to Saturday, 8:00–18:00, Ghana time) and when replies resume otherwise. The card stays for up to 60 seconds, or until the visitor closes it, taps it, opens the menu or reaches the contact form.
 - `prefers-reduced-motion` turns off all of these animations.
 
 ## Local preview
