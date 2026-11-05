@@ -238,12 +238,15 @@ The site was tested at 360, 390, 768, 1024 and 1440px on both pages, in Chrome (
 
 ### PageSpeed Insights (mobile)
 
-| Page | Performance | Accessibility | Best Practices | SEO | TBT | CLS | Report |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Homepage | _pending_ | | | | | | |
-| Contact | _pending_ | | | | | | |
+The official PageSpeed Insights API was over its shared daily quota on 5 November 2026, so the figures below come from Lighthouse 13.6 run from a Windows laptop against the production deployment (commit `d388059`), mobile preset, two runs per page. They are not official PSI numbers; run https://pagespeed.web.dev/ in Mobile mode for those.
 
-Official scores will be added after the deployment is measured on https://pagespeed.web.dev/ in Mobile mode.
+| Page | Performance | Accessibility | Best Practices | SEO | LCP | TBT | CLS |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Homepage, as served | 74–76 | 100 | 100 | 100 | 2.6–2.7 s | 710–840 ms | 0 |
+| Homepage, Netlify badge blocked | 93–97 | 100 | 100 | 100 | 1.9–2.4 s | 60–140 ms | 0 |
+| Contact, as served | 84–99 | 100 | 100 | 100 | 1.8–2.5 s | 20–400 ms | 0 |
+
+**What the gap is.** Netlify injects a "Powered by Netlify" badge script (`/.netlify/scripts/hud`) on free-plan sites. The trace shows one 813 ms long task from that script, which builds an iframe whose own styling costs about 2 s of style and layout work; the site's own JavaScript totals 7 ms. Everything else (image sizing, preload, layout shift, accessibility, SEO) meets the targets. The badge cannot be switched off on the free plan, and because it is served from the site's own origin the Content Security Policy cannot exclude it. On the client's own paid Netlify plan (or any other host) it is absent, and the page scores in the 90s.
 
 ## Client handover
 
