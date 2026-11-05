@@ -519,7 +519,7 @@ h1 .accent { color: var(--green); white-space: nowrap; }
   .step { padding-left: 0; }
   .step-num { position: relative; margin-bottom: 1.25rem; }
   .step h3 { margin-top: 0; }
-  .faq-grid { grid-template-columns: .8fr 1.2fr; gap: 4rem; align-items: start; }
+  .faq-list { max-width: 46rem; margin-inline: auto; }
   .duo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2.5rem, 5vw, 4rem); }
   /* Photos take a shorter 3:2 frame beside text, and the stats column fills the photo's height. */
   .duo-photo img { aspect-ratio: 3 / 2; }
@@ -533,7 +533,6 @@ h1 .accent { color: var(--green); white-space: nowrap; }
   .cta-panel { grid-template-columns: 1fr auto; align-items: end; }
   .footer-top { grid-template-columns: 2fr 1fr 1fr; }
   .footer-brand-block { grid-column: auto; }
-  .faq-grid .section-head { position: sticky; top: 110px; }
 }
 
 /* ≥ 1000px: wide hero photo; three testimonial columns */
@@ -569,7 +568,8 @@ h1 .accent { color: var(--green); white-space: nowrap; }
 
 
 /* Keep footer content clear of the floating WhatsApp button and the Netlify badge below it. */
-.site-footer { padding-bottom: 9.5rem; }
+.site-footer { padding-bottom: 5.5rem; }
+.footer-bottom { padding-right: 4.5rem; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
