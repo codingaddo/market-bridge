@@ -187,7 +187,7 @@ Homepage order:
 5. Features: intro beside a photo, then four small tiles
 6. How it works
 7. Stories: centred heading, a centred row of three figures, then the market photo beside a featured quote with two shorter quotes beneath
-8. FAQ: searchable accordion beside a "still have a question?" panel with a WhatsApp fallback and live opening-hours status
+8. FAQ: accordion beside a "still have a question?" panel with a WhatsApp fallback and live opening-hours status
 9. Contact call-to-action
 10. Footer
 
@@ -203,7 +203,7 @@ Partner names, figures and testimonials are illustrative, and the footer says so
   - turns smoky over the dark section;
   - compacts after the first scroll, tucks away while scrolling down and returns on scroll up.
 - **Phone menu:** a glass panel that fades in. It closes on a link tap, a tap outside it, scrolling or Escape.
-- **FAQ:** answers slide open and closed, one at a time. Without JavaScript, `<details name="faq">` keeps the one-at-a-time behaviour. A search box filters the questions as the visitor types; without JavaScript it is hidden and every question shows.
+- **FAQ:** answers slide open and closed, one at a time. Without JavaScript, `<details name="faq">` keeps the one-at-a-time behaviour.
 - **WhatsApp greeting (homepage):**
   - appears after about 5 seconds, or once the visitor scrolls past the hero;
   - shows the opening-hours status in Ghana time;

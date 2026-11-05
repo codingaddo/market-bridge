@@ -319,13 +319,6 @@ h1 .accent { color: var(--green); white-space: nowrap; }
 .faq { background: var(--surface); }
 .faq-grid { display: grid; gap: var(--sp-5); }
 .faq-main .section-head { margin-bottom: var(--sp-4); }
-.faq-search { position: relative; margin-bottom: var(--sp-3); }
-.faq-search svg { position: absolute; left: 1rem; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); fill: none; stroke: var(--ink-3); stroke-width: 1.8; stroke-linecap: round; pointer-events: none; }
-.faq-search input { width: 100%; padding: .75rem 1rem .75rem 2.75rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; font-size: var(--fs-small); transition: border-color .18s ease, box-shadow .18s ease; }
-.faq-search input::placeholder { color: var(--ink-3); }
-.faq-search input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 4px rgba(18, 116, 83, .14); }
-html:not(.js) .faq-search { display: none; }
-.faq-empty { margin-top: var(--sp-3); color: var(--ink-2); font-size: var(--fs-small); }
 .faq-aside { align-self: start; }
 /* FAQ fallback: a quiet panel with the fastest way to ask. */
 .faq-card { padding: var(--sp-4) var(--sp-3); background: var(--green-tint); border-radius: var(--radius-lg); }
