@@ -326,15 +326,18 @@ h1 .accent { color: var(--green); white-space: nowrap; }
   .stats { grid-template-columns: repeat(3, 1fr); }
   .stat { padding: 1.6rem 1.5rem 1.6rem 0; border-bottom: 0; }
   .stat + .stat { padding-left: 1.5rem; border-left: 1px solid var(--line); }
+  /* Tablets: one featured quote across the top, two below. */
+  .quotes { grid-template-columns: 1fr 1fr; }
+  .quote:first-child { grid-column: 1 / -1; }
+  .quote:first-child blockquote p { max-width: 34em; font-size: clamp(1.3rem, 2.8vw, 1.55rem); line-height: 1.45; }
 }
 
 /* ≥ 760px */
 @media (min-width: 760px) {
   .bento { grid-template-columns: 1fr 1fr; }
   .tile-wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2.5rem; }
-  .quotes { grid-template-columns: repeat(3, 1fr); }
-  .cta-panel { grid-template-columns: 1fr auto; align-items: end; }
-  .footer-top { grid-template-columns: 2fr 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .footer-brand-block { grid-column: 1 / -1; }
 }
 
 /* ≥ 920px: desktop navigation and two-column layouts */
@@ -362,8 +365,18 @@ h1 .accent { color: var(--green); white-space: nowrap; }
   .step-num { position: relative; margin-bottom: 1.25rem; }
   .step h3 { margin-top: 0; }
   .faq-grid { grid-template-columns: .8fr 1.2fr; gap: 4rem; align-items: start; }
+  .cta-panel { grid-template-columns: 1fr auto; align-items: end; }
+  .footer-top { grid-template-columns: 2fr 1fr 1fr; }
+  .footer-brand-block { grid-column: auto; }
   .faq-grid .section-head { position: sticky; top: 110px; }
   .contact-grid { grid-template-columns: .85fr 1.15fr; }
+}
+
+/* ≥ 1000px: three equal testimonial columns */
+@media (min-width: 1000px) {
+  .quotes { grid-template-columns: repeat(3, 1fr); }
+  .quote:first-child { grid-column: auto; }
+  .quote:first-child blockquote p { max-width: none; font-size: 1.15rem; line-height: 1.5; }
 }
 
 /* ≥ 1100px: the bento becomes three columns */
