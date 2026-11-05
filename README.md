@@ -48,7 +48,9 @@ Partner names, figures and testimonials are illustrative, and the footer says so
 - Setup runs after the `load` event, and only elements that start below the viewport are hidden. Without JavaScript, everything is visible.
 - The hero receipt prints line by line on load (CSS only).
 - The floating nav is frosted glass: the page shows through it, and it turns smoky with light text over the dark section. It compacts after the first scroll, tucks away while scrolling down, returns on scroll up, and a soft pill marks the section in view. Nav links land sections flush with the top of the window, so the glass always floats over the section you chose.
-- On phones, a "Book a free walkthrough" bar slides up after the hero and hides near the contact form and footer.
+- On phones, the menu opens as a glass panel that fades and slides in. It closes on a link tap, a tap outside it, scrolling, or Escape.
+- FAQ answers slide open and closed, and only one is open at a time. Without JavaScript, `<details name="faq">` keeps the one-at-a-time behaviour without animation.
+- The WhatsApp button sits above the "Powered by Netlify" badge that Netlify adds on free plans. `_headers` allows that badge's inline script by hash, plus inline styles.
 - `prefers-reduced-motion` turns off all of these animations.
 
 ## Local preview

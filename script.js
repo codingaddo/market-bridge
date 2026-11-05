@@ -24,18 +24,93 @@ if (menuButton && navigation) {
       menuButton.focus();
     }
   });
+
+  // Close when tapping anywhere outside the capsule or its menu.
+  const shell = menuButton.closest('.nav-shell');
+  document.addEventListener('pointerdown', (event) => {
+    if (navigation.classList.contains('is-open') && shell && !shell.contains(event.target)) setMenu(false);
+  });
+
+  // Close as soon as the visitor starts scrolling the page.
+  let openedAt = 0;
+  menuButton.addEventListener('click', () => { openedAt = window.scrollY; });
+  window.addEventListener('scroll', () => {
+    if (navigation.classList.contains('is-open') && Math.abs(window.scrollY - openedAt) > 12) setMenu(false);
+  }, { passive: true });
 }
 
 const year = document.querySelector('#current-year');
 if (year) year.textContent = String(new Date().getFullYear());
 
-/* Header shadow once the page scrolls, and the phone call-to-action bar,
-   shown after the hero and hidden again near the contact form and footer. */
+/* FAQ accordion: one answer open at a time, with a smooth slide.
+   The markup uses <details name="faq">, so without JavaScript the browser
+   still keeps only one open (without animation). */
+const faqItems = Array.from(document.querySelectorAll('.faq-list details'));
+
+if (faqItems.length && typeof Element.prototype.animate === 'function') {
+  const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const timing = { duration: 320, easing: 'cubic-bezier(.2, .7, .2, 1)' };
+  const running = new WeakMap();
+
+  // Script manages exclusivity so the item that closes can animate too.
+  faqItems.forEach((item) => item.removeAttribute('name'));
+
+  const animate = (item, opening) => {
+    const answer = item.querySelector('.faq-answer');
+    const previous = running.get(item);
+    const from = answer.getBoundingClientRect().height;
+    if (previous) previous.cancel();
+
+    if (opening) {
+      item.classList.remove('is-closing');
+      item.open = true;
+    } else {
+      item.classList.add('is-closing');
+    }
+
+    if (!motionOk) {
+      if (!opening) {
+        item.open = false;
+        item.classList.remove('is-closing');
+      }
+      return;
+    }
+
+    const to = opening ? answer.scrollHeight : 0;
+    const animation = answer.animate(
+      [
+        { height: `${opening && !previous ? 0 : from}px`, opacity: opening ? 0 : 1 },
+        { height: `${to}px`, opacity: opening ? 1 : 0 },
+      ],
+      timing,
+    );
+    running.set(item, animation);
+    animation.onfinish = () => {
+      running.delete(item);
+      if (!opening) {
+        item.open = false;
+        item.classList.remove('is-closing');
+      }
+    };
+  };
+
+  faqItems.forEach((item) => {
+    item.querySelector('summary').addEventListener('click', (event) => {
+      event.preventDefault();
+      const opening = !item.open || item.classList.contains('is-closing');
+      if (opening) {
+        faqItems.forEach((other) => {
+          if (other !== item && other.open && !other.classList.contains('is-closing')) animate(other, false);
+        });
+      }
+      animate(item, opening);
+    });
+  });
+}
+
+/* Header shadow once the page scrolls. */
 if ('IntersectionObserver' in window) {
   const header = document.querySelector('.site-header');
-  const hero = document.querySelector('.hero');
-  const mobileCta = document.querySelector('[data-mobile-cta]');
-  const endZones = document.querySelectorAll('#contact, .site-footer');
 
   const sentinel = document.createElement('div');
   sentinel.setAttribute('aria-hidden', 'true');
@@ -152,31 +227,6 @@ if ('IntersectionObserver' in window) {
       const section = document.querySelector(link.getAttribute('href'));
       if (section) spy.observe(section);
     });
-  }
-
-  if (hero && mobileCta) {
-    let heroVisible = true;
-    const endVisible = new Set();
-
-    const update = () => {
-      const show = !heroVisible && endVisible.size === 0;
-      mobileCta.classList.toggle('is-visible', show);
-      document.body.classList.toggle('has-mobile-cta', show);
-    };
-
-    new IntersectionObserver(([entry]) => {
-      heroVisible = entry.isIntersecting;
-      update();
-    }).observe(hero);
-
-    const endObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) endVisible.add(entry.target);
-        else endVisible.delete(entry.target);
-      });
-      update();
-    });
-    endZones.forEach((zone) => endObserver.observe(zone));
   }
 }
 

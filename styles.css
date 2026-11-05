@@ -65,10 +65,13 @@ h1, h2, h3 { font-family: var(--font-display); color: var(--ink); }
 
 /* Header: a floating glass capsule */
 .site-header { position: sticky; top: 0; z-index: 40; padding: 10px 12px 0; }
-.nav-shell { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem; max-width: calc(var(--container) + 24px); min-height: 60px; margin-inline: auto; padding: 0 8px 0 14px; color: var(--ink); background: rgba(255, 255, 255, .5); border: 1px solid rgba(255, 255, 255, .65); border-radius: 999px; -webkit-backdrop-filter: saturate(180%) blur(22px); backdrop-filter: saturate(180%) blur(22px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .75), 0 6px 24px rgba(21, 32, 28, .06); transition: max-width .5s var(--ease), transform .4s var(--ease), box-shadow .3s ease, background-color .35s ease, border-color .35s ease, color .35s ease; }
+.nav-shell { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem; max-width: calc(var(--container) + 24px); min-height: 60px; margin-inline: auto; padding: 0 8px 0 14px; color: var(--ink); background: rgba(255, 255, 255, .5); border: 1px solid rgba(255, 255, 255, .65); border-radius: 999px; isolation: isolate; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .75), 0 6px 24px rgba(21, 32, 28, .06); transition: max-width .5s var(--ease), transform .4s var(--ease), box-shadow .3s ease, background-color .35s ease, border-color .35s ease, color .35s ease; }
 .site-header.is-scrolled .nav-shell { background: rgba(255, 255, 255, .58); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 12px 40px rgba(21, 32, 28, .12), 0 1px 2px rgba(21, 32, 28, .05); }
 /* Over dark sections the glass turns smoky and the text light (class set by script.js). */
 .site-header.on-dark .nav-shell { color: #fff; background: rgba(18, 27, 24, .42); border-color: rgba(255, 255, 255, .14); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 12px 40px rgba(0, 0, 0, .25); }
+/* The blur lives on a background layer: a blurred element nested in another blurred
+   element only sees its parent, so this keeps the mobile menu's glass working. */
+.nav-shell::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; -webkit-backdrop-filter: saturate(180%) blur(22px); backdrop-filter: saturate(180%) blur(22px); pointer-events: none; }
 .site-header.on-dark .menu-button span:not(.sr-only) { background: #fff; }
 .site-header.is-hidden .nav-shell { transform: translateY(calc(-100% - 24px)); box-shadow: none; }
 .nav-indicator { display: none; }
@@ -76,8 +79,9 @@ h1, h2, h3 { font-family: var(--font-display); color: var(--ink); }
 .menu-button span:not(.sr-only) { display: block; width: 20px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: transform .25s var(--ease), background-color .35s ease; }
 .menu-button[aria-expanded="true"] span:nth-child(2) { transform: translateY(3.75px) rotate(45deg); }
 .menu-button[aria-expanded="true"] span:nth-child(3) { transform: translateY(-3.75px) rotate(-45deg); }
-.primary-nav { position: absolute; top: calc(100% + 8px); left: 0; right: 0; display: none; flex-direction: column; padding: .5rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: 0 24px 60px rgba(21, 32, 28, .14); }
-.primary-nav.is-open { display: flex; }
+.primary-nav { position: absolute; top: calc(100% + 10px); left: 0; right: 0; display: flex; flex-direction: column; padding: .5rem; color: var(--ink); background: rgba(255, 255, 255, .62); border: 1px solid rgba(255, 255, 255, .7); border-radius: var(--radius-lg); -webkit-backdrop-filter: saturate(180%) blur(24px); backdrop-filter: saturate(180%) blur(24px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 24px 60px rgba(21, 32, 28, .16); opacity: 0; visibility: hidden; transform: translateY(-8px) scale(.98); transform-origin: top center; transition: opacity .22s ease, transform .3s var(--ease), visibility 0s linear .3s; }
+.primary-nav.is-open { opacity: 1; visibility: visible; transform: none; transition: opacity .22s ease, transform .35s var(--ease), visibility 0s; }
+.primary-nav a + a:not(.nav-cta) { border-top: 1px solid rgba(21, 32, 28, .06); border-radius: 0; }
 .primary-nav a { padding: .85rem 1rem; color: var(--ink); font-size: 1.05rem; font-weight: 600; text-decoration: none; border-radius: 12px; }
 .primary-nav a:hover { background: var(--bg); }
 .primary-nav .nav-cta { margin-top: .4rem; color: #fff; background: var(--green); text-align: center; }
@@ -245,9 +249,10 @@ h1 .accent { color: var(--green); white-space: nowrap; }
 .faq-list summary::-webkit-details-marker { display: none; }
 .faq-list summary::before, .faq-list summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: transform .25s var(--ease); }
 .faq-list summary::after { transform: rotate(90deg); }
-.faq-list details[open] summary::after { transform: rotate(0deg); }
+.faq-list details[open]:not(.is-closing) summary::after { transform: rotate(0deg); }
 .faq-list summary:hover { color: var(--green-ink); }
-.faq-list details p { max-width: 40rem; padding: 0 2.75rem 1.4rem 0; color: var(--ink-2); }
+.faq-answer { overflow: hidden; }
+.faq-answer p { max-width: 40rem; padding: 0 2.75rem 1.4rem 0; color: var(--ink-2); }
 
 /* Contact */
 .contact { background: var(--bg); }
@@ -292,15 +297,11 @@ h1 .accent { color: var(--green); white-space: nowrap; }
 .back-to-top:hover { color: var(--ink); }
 
 /* Floating WhatsApp: a round icon pinned to the corner */
-.whatsapp-button { position: fixed; right: clamp(16px, 2vw, 32px); bottom: clamp(16px, 2vw, 28px); z-index: 50; display: grid; place-items: center; width: 58px; height: 58px; color: #fff; background: #128c4a; border-radius: 50%; box-shadow: 0 12px 28px rgba(0, 0, 0, .22), 0 0 0 4px rgba(255, 255, 255, .7); text-decoration: none; transition: transform .3s var(--ease), background-color .2s ease; }
+/* Sits above the "Powered by Netlify" badge that Netlify pins to the bottom-right corner on free plans. */
+.whatsapp-button { position: fixed; right: 18px; bottom: 76px; z-index: 50; display: grid; place-items: center; width: 58px; height: 58px; color: #fff; background: #128c4a; border-radius: 50%; box-shadow: 0 12px 28px rgba(0, 0, 0, .22), 0 0 0 4px rgba(255, 255, 255, .7); text-decoration: none; transition: transform .3s var(--ease), background-color .2s ease; }
 .whatsapp-button:hover { background: #0d763d; transform: translateY(-2px) scale(1.04); }
 .whatsapp-button svg { width: 30px; height: 30px; fill: currentColor; }
 
-/* Sticky call to action on phones; script.js shows it between the hero and the contact form. */
-.mobile-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; padding: 12px 88px calc(12px + env(safe-area-inset-bottom)) 16px; background: rgba(255, 255, 255, .88); border-top: 1px solid var(--line); -webkit-backdrop-filter: saturate(180%) blur(16px); backdrop-filter: saturate(180%) blur(16px); transform: translateY(110%); visibility: hidden; transition: transform .35s var(--ease), visibility .35s; }
-.mobile-cta .button { width: 100%; min-height: 50px; }
-.mobile-cta.is-visible { transform: none; visibility: visible; }
-body.has-mobile-cta .whatsapp-button { transform: translateY(-3px); }
 
 /* Scroll reveal: only elements that start below the fold get .reveal-pending (set by script.js). */
 .reveal-pending { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .7s var(--ease); }
@@ -325,7 +326,6 @@ body.has-mobile-cta .whatsapp-button { transform: translateY(-3px); }
   .quotes { grid-template-columns: repeat(3, 1fr); }
   .cta-panel { grid-template-columns: 1fr auto; align-items: end; }
   .footer-top { grid-template-columns: 2fr 1fr 1fr; }
-  .mobile-cta { display: none; }
 }
 
 /* ≥ 920px: desktop navigation and two-column layouts */
@@ -333,7 +333,8 @@ body.has-mobile-cta .whatsapp-button { transform: translateY(-3px); }
   .site-header { padding-top: 14px; }
   .menu-button { display: none; }
   .site-header.is-scrolled .nav-shell { max-width: 860px; }
-  .primary-nav { position: relative; display: flex; flex-direction: row; align-items: center; gap: .15rem; padding: 0; background: none; border: 0; box-shadow: none; }
+  .primary-nav { position: relative; display: flex; flex-direction: row; align-items: center; gap: .15rem; padding: 0; color: inherit; background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; opacity: 1; visibility: visible; transform: none; transition: none; }
+  .primary-nav a + a:not(.nav-cta) { border-top: 0; border-radius: 999px; }
   .primary-nav a { position: relative; z-index: 1; padding: .55rem .9rem; color: var(--ink-2); font-size: .95rem; border-radius: 999px; transition: color .3s ease; }
   .primary-nav a[aria-current="true"] { color: var(--ink); }
   .nav-indicator { position: absolute; left: 0; top: 50%; z-index: 0; display: block; width: 0; height: 38px; margin-top: -19px; background: rgba(21, 32, 28, .06); border-radius: 999px; opacity: 0; pointer-events: none; transition: transform .45s var(--ease), width .45s var(--ease), opacity .25s ease; }
@@ -365,8 +366,9 @@ body.has-mobile-cta .whatsapp-button { transform: translateY(-3px); }
   h1 { font-size: clamp(4rem, 6vw, 5.6rem); }
 }
 
-/* Keep the footer clear of the floating button where content reaches the screen edge. */
-@media (max-width: 1360px) { .site-footer { padding-bottom: 6.5rem; } }
+
+/* Keep footer content clear of the floating WhatsApp button and the Netlify badge below it. */
+.site-footer { padding-bottom: 9.5rem; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
