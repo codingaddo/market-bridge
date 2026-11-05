@@ -110,6 +110,24 @@ if (faqItems.length && typeof Element.prototype.animate === 'function') {
   });
 }
 
+/* FAQ search: filters the questions as the visitor types. Without
+   JavaScript the box is hidden by CSS and every question shows. */
+const faqSearch = document.querySelector('#faq-search');
+if (faqSearch) {
+  const questions = Array.from(document.querySelectorAll('.faq-list details'));
+  const empty = document.querySelector('.faq-empty');
+  faqSearch.addEventListener('input', () => {
+    const query = faqSearch.value.trim().toLowerCase();
+    let shown = 0;
+    questions.forEach((item) => {
+      const match = !query || item.textContent.toLowerCase().includes(query);
+      item.hidden = !match;
+      if (match) shown += 1;
+    });
+    if (empty) empty.hidden = shown > 0;
+  });
+}
+
 /* Header shadow once the page scrolls. */
 if ('IntersectionObserver' in window) {
   const header = document.querySelector('.site-header');
