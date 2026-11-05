@@ -122,6 +122,8 @@ h1, h2, h3 { font-family: var(--font-display); color: var(--ink); }
 .button-light { color: var(--ink); background: #fff; }
 .button-light:hover { background: #f0f5f2; }
 .wa-glyph { width: 20px; height: 20px; fill: #128c4a; }
+/* Inline icons share one stroke style (Lucide-style, 2px rounded), sized to the text. */
+.icon { display: inline-block; width: 1.05em; height: 1.05em; flex: 0 0 auto; vertical-align: -.16em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .arrow { display: inline-block; transition: transform .2s var(--ease); }
 .button:hover .arrow, .button:focus-visible .arrow, .text-link:hover .arrow, .text-link:focus-visible .arrow { transform: translateX(3px); }
 .text-link { display: inline-flex; align-items: center; gap: .4rem; font-weight: 650; text-decoration: none; }
@@ -162,7 +164,8 @@ h3 { font-size: var(--fs-title); font-weight: 650; line-height: 1.3; letter-spac
 .hero .button-quiet:hover { background: rgba(255, 255, 255, .2); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .5); }
 .hero .wa-glyph { fill: var(--mint); }
 .hero .trust-list { color: rgba(255, 255, 255, .86); }
-.hero .trust-list li::before { color: #0c3b2a; background: var(--mint); }
+.hero .trust-list li::before { background: var(--mint); }
+.hero .trust-list li::after { border-color: #0c3b2a; }
 .hero-stage :focus-visible { outline-color: var(--mint); }
 .kicker { display: inline-flex; align-items: center; gap: .5rem; margin-bottom: var(--sp-3); padding: .3rem .8rem .3rem .65rem; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; font-size: var(--fs-caption); font-weight: 600; }
 .kicker-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; box-shadow: 0 0 0 3px var(--green-tint); }
@@ -172,7 +175,10 @@ h1 .accent { color: var(--green); white-space: nowrap; }
 .hero-actions { display: flex; flex-direction: column; gap: .75rem; margin-top: var(--sp-4); }
 .trust-list { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; margin: var(--sp-4) 0 0; padding: 0; list-style: none; color: var(--ink-2); font-size: var(--fs-small); font-weight: 550; }
 .trust-list li { display: inline-flex; align-items: center; gap: .45rem; }
-.trust-list li::before { content: "✓"; display: grid; place-items: center; width: 18px; height: 18px; color: var(--green); background: var(--green-tint); border-radius: 50%; font-size: .7rem; font-weight: 800; }
+/* Check mark drawn in CSS: a tinted disc with a rotated corner, so it renders the same on every device. */
+.trust-list li::before { content: ""; position: relative; display: block; width: 18px; height: 18px; background: var(--green-tint); border-radius: 50%; }
+.trust-list li::after { content: ""; position: absolute; left: 6.5px; top: 4px; width: 4px; height: 8px; border: solid var(--green); border-width: 0 1.8px 1.8px 0; transform: rotate(45deg); }
+.trust-list li { position: relative; }
 
 /* Side-by-side rows: words beside a photo or the sample record. */
 .duo { display: grid; gap: clamp(2rem, 5vw, 3rem); align-items: center; }
@@ -230,7 +236,8 @@ h1 .accent { color: var(--green); white-space: nowrap; }
 .receipt-week rect.is-today { fill: var(--green); }
 .receipt-week rect.is-future { fill: #e3e8e4; }
 .receipt-chip { position: absolute; right: -8px; top: -16px; display: inline-flex; align-items: center; gap: .45rem; padding: .5rem .85rem .5rem .55rem; color: var(--ink); background: rgba(255, 255, 255, .96); border: 1px solid var(--line); border-radius: 999px; font-size: var(--fs-caption); font-weight: 650; box-shadow: 0 10px 24px rgba(21, 32, 28, .1); }
-.receipt-chip span { display: grid; place-items: center; width: 20px; height: 20px; color: #fff; background: var(--green); border-radius: 50%; font-size: .75rem; }
+.receipt-chip span { display: grid; place-items: center; width: 20px; height: 20px; color: #fff; background: var(--green); border-radius: 50%; }
+.receipt-chip .icon { width: 12px; height: 12px; stroke-width: 2.6; }
 .receipt-wrap figcaption { margin-top: 1.4rem; color: var(--ink-3); font-size: var(--fs-caption); text-align: center; }
 
 /* Receipt "prints" line by line on load (opacity and transform only). */

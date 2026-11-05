@@ -175,7 +175,7 @@ Sitemap: https://marketbridge-sample.netlify.app/sitemap.xml
 
 ## Design
 
-"The honest receipt": calm porcelain surfaces, one cedi-green accent, system fonts and monospace figures for every amount. The logo is a lowercase m drawn as two bridge arches with a gold coin (`assets/favicon.svg`, also inline in the header and footer).
+"The honest receipt": calm porcelain surfaces, one cedi-green accent, system fonts and monospace figures for every amount. The logo is a lowercase m drawn as two bridge arches with a gold coin (`assets/favicon.svg`, also inline in the header and footer). Every icon is an inline SVG in one stroke style (2 px, rounded; the arrows and check are Lucide-style paths), so nothing external loads and they render identically on every device. The FAQ plus/minus and the small check discs are drawn in CSS.
 
 The layout follows a few rules: one idea per section, photos beside text rather than full-width (except the two heroes), small type (16 px body, 14 px captions, headings capped at about 38 px), compact buttons (42 px) and cards, and one spacing scale (`--sp-1` to `--sp-6`) used everywhere so nothing feels crowded.
 

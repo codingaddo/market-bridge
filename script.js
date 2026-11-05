@@ -328,7 +328,7 @@ const form = document.querySelector('.contact-form');
 if (form && window.fetch) {
   const status = form.querySelector('.form-status');
   const submitButton = form.querySelector('[type="submit"]');
-  const submitLabel = submitButton.textContent;
+  const submitLabel = Array.from(submitButton.childNodes); // text plus the arrow icon
   const phonePattern = /^[+\d][\d\s()-]{6,19}$/;
 
   const messages = {
@@ -430,7 +430,7 @@ if (form && window.fetch) {
       status.focus();
     } finally {
       submitButton.disabled = false;
-      submitButton.textContent = submitLabel;
+      submitButton.replaceChildren(...submitLabel);
     }
   });
 }
